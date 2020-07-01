@@ -1,6 +1,6 @@
 # Peyman Language
 
-A programming language to make fun of our friend, Peyman.
+A programming language to honor our beloved friend, Peyman.
 
 ## Installation from source
 
