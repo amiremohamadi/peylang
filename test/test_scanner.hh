@@ -8,7 +8,7 @@
 #include <parser/tokens.hh>
 
 TEST_CASE("scanner basic test", "[scanner]") {
-  std::ifstream in("sample_file.tu");
+  std::ifstream in("sample_file.pey");
   // check if the file is opened correctly
   SECTION("the file is opened correctly") { REQUIRE(in.is_open() == true); }
   // pass ifstream as istream* to the scanner
