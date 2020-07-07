@@ -2,11 +2,11 @@
 #ifndef TOKENS_HH_
 #define TOKENS_HH_
 
-namespace tu {
+namespace pey {
 enum token {
   T_INT = 257,
   T_FLOAT,
 };
-} // namespace tu
+} // namespace pey
 
 #endif // END TOKENS_HH_

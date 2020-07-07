@@ -1,7 +1,7 @@
 /* this file will generate the actual scanner for peylang */
 %option noyywrap
 %option yylineno
-%option yyclass="tu::Scanner"
+%option yyclass="pey::Scanner"
 %option c++
 
 %{
