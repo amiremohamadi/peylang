@@ -7,6 +7,7 @@
 
 %{
 #include <iostream>
+#include <list>
 
 extern int yylex();
 extern int yylineno;
@@ -27,30 +28,37 @@ void yyerror(const char *str) {
 %token <double>      T_FLOAT64
 %token <std::string> T_STRING
 
+%right '='
 %left '+' '-'
 %left '*' '/'
+
+%type<std::list<Statement>> statements
+%type<Statement> statement
+%type<Statement> assignment
+%type<Statement> print 
+%type<Expression> expression
 
 
 %%
 program: /* empty */
-       | statements { /* do something */  }
+       | statements { Program($1).eval(); }
 ;
 
-statements: statements statement { /* do something */ }
-          | statement { /* do something */ }
+statements: statements statement { $1.push_back($2); }
+          | statement { std::list<Statement *> ls; ls.push_back($1);}
 ;
 
 statement: assignment
          | print
 ;
 
-assignment: T_IDENT '=' expression { /* do something */ }
+assignment: T_IDENT '=' expression { $$ = new Assign($1, $3); }
 ;
 
-print: T_PRINT expression { /* do something */ }
+print: T_PRINT expression { $$ = new Print($2); }
 ;
 
-expression: '(' expression ')' { /* do something */ }
+expression: '(' expression ')' { $$ = $2; }
           | T_INT { /* do something*/ }
           | T_FLOAT64 { /* do something */ }
           | T_IDENT { /* do something */ }
