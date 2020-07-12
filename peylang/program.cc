@@ -13,5 +13,7 @@ int Program::eval() {
   // TODO: throw readable exceptions
   for (auto stmnt : this->_statements)
     stmnt->eval(this->_symtable);
+
+  return 0;
 }
 } // namespace pey
