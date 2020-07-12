@@ -3,6 +3,10 @@
 #ifndef EXPRESSION_HH_
 #define EXPRESSION_HH_
 
+#include <map>
+#include <object.hh>
+#include <symtable.hh>
+
 namespace pey {
 
 class Expression {

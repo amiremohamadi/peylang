@@ -3,6 +3,9 @@
 #ifndef SYMTABLE_HH_
 #define SYMTABLE_HH_
 
+#include <map>
+#include <object.hh>
+
 namespace pey {
 
 class Symtable {

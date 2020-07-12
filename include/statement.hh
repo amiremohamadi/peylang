@@ -4,6 +4,7 @@
 #ifndef STATEMENT_HH_
 #define STATEMENT_HH_
 
+#include <expression.hh>
 #include <symtable.hh>
 
 namespace pey {
