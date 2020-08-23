@@ -1,21 +1,18 @@
-CXX = g++
-LEX = flex
-YACC = bison -d
+CXX 	:= g++
+LEX 	:= flex
+YACC 	:= bison -d
 
-PROGRAM = peyman
+PROGRAM := peyman
 
-INCLUDE = -Iinclude/ -Iparser/
-SRC = $(wildcard peylang/*cc) peyman.cc
-OBJ = $(SRC:%.cc=%.o) parser/parser.tab.o parser/lex.yy.o
+INCLUDE := -Iinclude/ -Iparser/
+SRC 	:= $(wildcard peylang/*cc)
+OBJ		:= $(SRC:%.cc=%.o) parser/parser.tab.o parser/lex.yy.o
 
-
-%.o: %.cc
-	$(CXX) $(INCLUDE) -c $< -o $@
 
 all: $(PROGRAM)
 
 peyman: $(OBJ)
-	$(CXX) $(INCLUDE) -o $(PROGRAM) $(OBJ)
+	$(CXX) $(INCLUDE) -o $(PROGRAM) $(OBJ) peyman.cc
 
 parser/parser.tab.c: parser/parser.y
 	$(YACC) -o parser/parser.tab.c parser/parser.y
@@ -28,6 +25,9 @@ parser/lex.yy.c: parser/scanner.l parser/parser.tab.o
 
 parser/lex.yy.o: parser/lex.yy.c
 	$(CXX) $(INCLUDE) -c parser/lex.yy.c -o parser/lex.yy.o
+
+%.o: %.cc
+	$(CXX) $(INCLUDE) -c $< -o $@
 
 clean:
 	rm -f $(OBJ) $(PROGRAM) parser/parser.tab.c parser/parser.tab.h parser/lex.yy.c
