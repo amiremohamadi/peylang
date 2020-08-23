@@ -10,11 +10,11 @@ namespace pey {
 class Program {
 private:
   // statements as a doubly-linked list
-  std::list<Statement *> _statements;
+  std::list<Statement *> *_statements;
   Symtable _symtable;
 
 public:
-  Program(std::list<Statement *> stmnts);
+  Program(std::list<Statement *> *stmnts);
   ~Program();
   int eval();
 };

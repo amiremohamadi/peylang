@@ -5,6 +5,7 @@
 #define STATEMENT_HH_
 
 #include <expression.hh>
+#include <list>
 #include <symtable.hh>
 
 namespace pey {
@@ -14,13 +15,22 @@ public:
   virtual int eval(Symtable &smtbl) const = 0;
 };
 
+class Statements {
+private:
+  std::list<Statement *> _statements;
+
+public:
+  std::list<Statement *> get_statements();
+  void add(Statement *s);
+};
+
 class Assign : public Statement {
 private:
   std::string _ident;
   Expression *_expr;
 
 public:
-  Assign(std::string nm, Expression *expr);
+  Assign(const std::string &nm, Expression *expr);
   ~Assign();
   int eval(Symtable &smtbl) const;
 };
@@ -34,6 +44,8 @@ public:
   ~Print();
   int eval(Symtable &smtbl) const;
 };
+
+typedef std::list<Statement *> StatementList;
 
 } // namespace pey
 
