@@ -3,7 +3,8 @@
 
 namespace pey {
 // assignment
-Assign::Assign(std::string nm, Expression *expr) : _ident(nm), _expr(expr) {}
+Assign::Assign(const std::string &nm, Expression *expr)
+    : _ident(nm), _expr(expr) {}
 
 Assign::~Assign() { delete this->_expr; }
 
