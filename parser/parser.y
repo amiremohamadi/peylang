@@ -29,12 +29,12 @@ int parse_result = 1;
 void yyerror(const char *str) {
     // check error flag to supress duplicate message (actually it's bison stuff)
     if (!error) 
-        cerr << "Akh! Khate " << yylineno << " moshkel dare! "
+        cerr << "MARG! khatt'e " << yylineno << " eshtebahe! "
              << str << endl;
 }
 
 void yyerror(const char *str, char chr) {
-    cerr << "Akh! Khate " << yylineno << " moshkel dare! " 
+    cerr << "MARG! khatt'e " << yylineno << " eshtebahe! " 
          << str << "\"" << chr << "\"" << endl;
     // set error flag to be used in yyerror(const char *str) function
     error = true;
