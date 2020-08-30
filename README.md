@@ -4,7 +4,7 @@ A programming language to honor our beloved friend, Peyman.
 
 ## Installation from source
 
-we use cmake as build system
+~~we use cmake as build system~~ not anymore!
 
 ### Building on a Unix-like system
 1. Make sure you have installed all the dependencies:
