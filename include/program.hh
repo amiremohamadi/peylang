@@ -14,9 +14,10 @@ private:
   Symtable _symtable;
 
 public:
-  Program(std::list<Statement *> *stmnts);
-  ~Program();
-  int eval();
+  /* Program(std::list<Statement *> *stmnts); */
+  /* ~Program(); */
+  /* int eval(); */
+  void exec(Statement *stmnt);
 };
 
 } // namespace pey

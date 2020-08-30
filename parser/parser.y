@@ -49,6 +49,7 @@ void yyerror(const char *str, char chr) {
     Expression *exp;
     Statement *stmt;
     StatementList *stmtlist;
+		Program *prog;
     /* ExpressionList *explist; */
 }
 
@@ -62,22 +63,22 @@ void yyerror(const char *str, char chr) {
 %type<stmt> statement;
 %type<stmt> assignment;
 %type<stmt> print;
-%type<stmtlist> statement_list;
+%type<prog> program;
+/* %type<stmtlist> statement_list; */
 /* %type<explist> expression_list; */
 
 
 %%
-
-program: /**/
-       | statement_list { Program($1).eval(); }
+main: /**/
+    | program {}
 ;
 
-statement_list: statement_list statement { $1->push_back($2); $$ = $1; }
-              | statement { 
-                            StatementList *stment_lst = new StatementList; 
-                            stment_lst->push_back($1);
-                            $$ = stment_lst;
-                          }
+program: program statement { $1->exec($2); $$ = $1; }
+         | statement { 
+                        Program *prog = new Program; 
+                        prog->exec($1);
+                        $$ = prog;
+                    }
 ;
 
 statement: assignment
