@@ -14,14 +14,8 @@ std::ostream &operator<<(std::ostream &os, const Object &obj) {
 }
 
 Object Object::operator+(const Object &obj) const {
-  if (_type == INT && obj._type == INT) {
-    return Object(_val._int + obj._val._int);
-  } else if (_type == INT && obj._type == FLOAT) {
-    return Object(_val._int + obj._val._float);
-  } else if (_type == FLOAT && obj._type == INT) {
-    return Object(_val._float + obj._val._int);
-  }
-  return Object(_val._float + obj._val._float);
+  return Object((_type == INT ? _val._int : _val._float) +
+                (obj._type == INT ? obj._val._int : obj._val._float));
 }
 
 Object Object::operator-(const Object &obj) const { return Object(1); }
