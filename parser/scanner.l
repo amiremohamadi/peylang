@@ -23,15 +23,16 @@ float64   [0-9]*\.[0-9]+
 
 %%
 
-[ \t\n]     { /*whitespaces*/ }
-";"       { return P_EOL; }
-"="       { return yytext[0]; }
-"+"       { return yytext[0]; }
-"-"       { return yytext[0]; }
-"*"       { return yytext[0]; }
-"/"       { return yytext[0]; }
-"chiz"    { return P_CHIZ; }
-"chaap"   { return P_PRINT; }
+[ \t\n]         { /*whitespaces*/ }
+"--"[^\r\n]*    { /*comments*/ }
+";"             { return P_EOL; }
+"="             { return yytext[0]; }
+"+"             { return yytext[0]; }
+"-"             { return yytext[0]; }
+"*"             { return yytext[0]; }
+"/"             { return yytext[0]; }
+"chiz"          { return P_CHIZ; }
+"chaap"         { return P_PRINT; }
 
 {ident}   {
             yylval.ident = new char[strlen(yytext) + 1];
