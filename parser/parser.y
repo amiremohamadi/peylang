@@ -58,6 +58,7 @@ void yyerror(const char *str, char chr) {
 %token<ident>      P_IDENT  "ident"
 %token             P_CHIZ   "chiz"
 %token             P_PRINT  "print"
+%token             P_EOL    ";"
 
 %type<exp> expression;
 %type<stmt> statement;
@@ -69,20 +70,21 @@ void yyerror(const char *str, char chr) {
 
 
 %%
+
 main: /**/
     | program {}
 ;
 
 program: program statement { $1->exec($2); $$ = $1; }
-         | statement { 
+       | statement { 
                         Program *prog = new Program; 
                         prog->exec($1);
                         $$ = prog;
                     }
 ;
 
-statement: assignment
-         | print
+statement: assignment P_EOL
+         | print      P_EOL
 ;
 
 assignment: P_CHIZ P_IDENT '=' expression {
@@ -94,11 +96,15 @@ assignment: P_CHIZ P_IDENT '=' expression {
 print: P_PRINT expression { $$ = new Print($2); }
 ;
 
-expression: P_INT { $$ = new Constant($1); }
+expression: 
+          '(' expression ')' { $$ = $2; }
+          | P_INT   { $$ = new Constant($1); }
+          | P_FLOAT { $$ = new Constant($1); }
           | P_IDENT {
                         $$ = new Identifier($1);
                         delete [] $1;
                     }
+          | expression '+' expression { $$ = new Sum($1, $3); }
 ; 
 
 %%
