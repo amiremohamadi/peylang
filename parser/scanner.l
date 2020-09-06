@@ -23,10 +23,13 @@ float64   [0-9]*\.[0-9]+
 
 %%
 
-[ \t]     { /*whitespaces*/ }
+[ \t\n]     { /*whitespaces*/ }
 ";"       { return P_EOL; }
 "="       { return yytext[0]; }
 "+"       { return yytext[0]; }
+"-"       { return yytext[0]; }
+"*"       { return yytext[0]; }
+"/"       { return yytext[0]; }
 "chiz"    { return P_CHIZ; }
 "chaap"   { return P_PRINT; }
 
