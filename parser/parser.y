@@ -105,6 +105,9 @@ expression:
                         delete [] $1;
                     }
           | expression '+' expression { $$ = new Sum($1, $3); }
+          | expression '-' expression { $$ = new Sub($1, $3); }
+          | expression '*' expression { $$ = new Mul($1, $3); }
+          | expression '/' expression { $$ = new Div($1, $3); }
 ; 
 
 %%
