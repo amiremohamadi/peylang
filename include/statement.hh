@@ -47,6 +47,19 @@ public:
 
 typedef std::list<Statement *> StatementList;
 
+class IfElse : public Statement {
+private:
+  Expression *_condition;
+  StatementList *_true_list, *_false_list;
+
+public:
+  IfElse(Expression *condition, StatementList *true_list);
+  IfElse(Expression *condition, StatementList *true_list,
+         StatementList *false_list);
+  ~IfElse();
+  int eval(Symtable &smtbl) const;
+};
+
 } // namespace pey
 
 #endif // STATEMENT_HH_
