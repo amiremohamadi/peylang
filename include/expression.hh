@@ -76,6 +76,36 @@ public:
   virtual Object eval(Symtable &smtbl) const;
 };
 
+class NotEqual : public BinaryOperation {
+public:
+  using BinaryOperation::BinaryOperation;
+  virtual Object eval(Symtable &smtbl) const;
+};
+
+class LessEqual : public BinaryOperation {
+public:
+  using BinaryOperation::BinaryOperation;
+  virtual Object eval(Symtable &smtbl) const;
+};
+
+class GreaterEqual : public BinaryOperation {
+public:
+  using BinaryOperation::BinaryOperation;
+  virtual Object eval(Symtable &smtbl) const;
+};
+
+class Less : public BinaryOperation {
+public:
+  using BinaryOperation::BinaryOperation;
+  virtual Object eval(Symtable &smtbl) const;
+};
+
+class Greater : public BinaryOperation {
+public:
+  using BinaryOperation::BinaryOperation;
+  virtual Object eval(Symtable &smtbl) const;
+};
+
 typedef std::list<Expression *> ExpressionList;
 
 } // namespace pey
