@@ -42,8 +42,7 @@ IfElse::~IfElse() {
 
 int IfElse::eval(Symtable &smtbl) const {
   // TODO: use a wrapoer class instead of list as statement list
-  // TODO: eval condition with > 0
-  if (_condition->eval(smtbl) == 1) {
+  if (_condition->eval(smtbl) > 0) {
     for (auto exp : *_true_list) {
       exp->eval(smtbl);
     }
