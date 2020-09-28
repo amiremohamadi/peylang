@@ -20,6 +20,7 @@ namespace pey {
 void Program::exec(Statement *stmnt) {
   // insert new statement and execute it
   stmnt->eval(this->_symtable);
+  delete stmnt;
 }
 
 } // namespace pey

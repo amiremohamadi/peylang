@@ -35,5 +35,6 @@ int main(int argc, char **argv) {
   }
   yyparse();
 
+  fclose(yyin);
   return 0;
 }
