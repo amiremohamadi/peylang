@@ -48,7 +48,7 @@ void yyerror(const char *str, char chr) {
     char *ident;
     Expression *exp;
     Statement *stmt;
-    StatementList *stmtlist;
+    Statements *stmtlist;
     Program *prog;
     /* ExpressionList *explist; */
 }
@@ -86,7 +86,7 @@ void yyerror(const char *str, char chr) {
 %%
 
 main: /**/
-    | program {}
+    | program { delete $1; }
 ;
 
 program: program statement { $1->exec($2); $$ = $1; }
@@ -97,8 +97,8 @@ program: program statement { $1->exec($2); $$ = $1; }
                     }
 ;
 
-statementlist: statementlist statement { $1->push_back($2); $$ = $1; }
-             | statement { StatementList *sl = new StatementList; sl->push_back($1); $$ = sl; }
+statementlist: statementlist statement { $1->add($2); $$ = $1; }
+             | statement { Statements *sl = new Statements; sl->add($1); $$ = sl; }
 
 statement: assignment P_EOL
          | print      P_EOL
