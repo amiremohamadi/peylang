@@ -60,6 +60,17 @@ public:
   int eval(Symtable &smtbl) const;
 };
 
+class While : public Statement {
+private:
+  Expression *_condition;
+  StatementList *_true_list;
+
+public:
+  While(Expression *condition, StatementList *true_list);
+  ~While();
+  int eval(Symtable &smtbl) const;
+};
+
 } // namespace pey
 
 #endif // STATEMENT_HH_

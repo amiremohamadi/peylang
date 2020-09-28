@@ -56,4 +56,23 @@ int IfElse::eval(Symtable &smtbl) const {
   return 0;
 }
 
+// while loop statement
+While::While(Expression *condition, StatementList *true_list)
+    : _condition(condition), _true_list(true_list) {}
+
+While::~While() {
+  delete _condition;
+  delete _true_list;
+}
+
+int While::eval(Symtable &smtbl) const {
+  while (_condition->eval(smtbl) > 0) {
+    for (auto exp : *_true_list) {
+      exp->eval(smtbl);
+    }
+  }
+
+  return 0;
+}
+
 } // namespace pey
