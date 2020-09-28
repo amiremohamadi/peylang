@@ -60,6 +60,11 @@ void yyerror(const char *str, char chr) {
 %token             P_PRINT  "print"
 %token             P_IF     "agar"
 %token             P_EQ     "=="
+%token             P_NEQ    "!="
+%token             P_LEQ    "<="
+%token             P_GEQ    ">="
+%token             P_L      "<"
+%token             P_G      ">"
 %token             P_EOL    ";"
 
 %type<exp> expression;
@@ -114,11 +119,16 @@ expression:
                         $$ = new Identifier($1);
                         delete [] $1;
                     }
-          | expression '+' expression { $$ = new Sum($1, $3); }
-          | expression '-' expression { $$ = new Sub($1, $3); }
-          | expression '*' expression { $$ = new Mul($1, $3); }
-          | expression '/' expression { $$ = new Div($1, $3); }
-          | expression P_EQ expression{ $$ = new Equal($1, $3); }
+          | expression '+' expression   { $$ = new Sum($1, $3); }
+          | expression '-' expression   { $$ = new Sub($1, $3); }
+          | expression '*' expression   { $$ = new Mul($1, $3); }
+          | expression '/' expression   { $$ = new Div($1, $3); }
+          | expression P_EQ expression  { $$ = new Equal($1, $3); }
+          | expression P_NEQ expression { $$ = new NotEqual($1, $3); }
+          | expression P_LEQ expression { $$ = new LessEqual($1, $3); }
+          | expression P_GEQ expression { $$ = new GreaterEqual($1, $3); }
+          | expression P_L expression   { $$ = new Less($1, $3); }
+          | expression P_G expression   { $$ = new Greater($1, $3); }
 ; 
 
 %%
