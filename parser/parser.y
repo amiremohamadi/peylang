@@ -49,7 +49,7 @@ void yyerror(const char *str, char chr) {
     Expression *exp;
     Statement *stmt;
     StatementList *stmtlist;
-		Program *prog;
+    Program *prog;
     /* ExpressionList *explist; */
 }
 
@@ -58,14 +58,17 @@ void yyerror(const char *str, char chr) {
 %token<ident>      P_IDENT  "ident"
 %token             P_CHIZ   "chiz"
 %token             P_PRINT  "print"
+%token             P_IF     "agar"
+%token             P_EQ     "=="
 %token             P_EOL    ";"
 
 %type<exp> expression;
 %type<stmt> statement;
 %type<stmt> assignment;
 %type<stmt> print;
+%type<stmt> ifelse;
 %type<prog> program;
-/* %type<stmtlist> statement_list; */
+%type<stmtlist> statementlist;
 /* %type<explist> expression_list; */
 
 
@@ -83,8 +86,12 @@ program: program statement { $1->exec($2); $$ = $1; }
                     }
 ;
 
+statementlist: statementlist statement { $1->push_back($2); $$ = $1; }
+             | statement { StatementList *sl = new StatementList; sl->push_back($1); $$ = sl; }
+
 statement: assignment P_EOL
          | print      P_EOL
+         | ifelse
 ;
 
 assignment: P_CHIZ P_IDENT '=' expression {
@@ -95,6 +102,9 @@ assignment: P_CHIZ P_IDENT '=' expression {
 
 print: P_PRINT expression { $$ = new Print($2); }
 ;
+
+ifelse: P_IF expression '{' statementlist '}'
+        { $$ = new IfElse($2, $4); }
 
 expression: 
           '(' expression ')' { $$ = $2; }
@@ -108,6 +118,7 @@ expression:
           | expression '-' expression { $$ = new Sub($1, $3); }
           | expression '*' expression { $$ = new Mul($1, $3); }
           | expression '/' expression { $$ = new Div($1, $3); }
+          | expression P_EQ expression{ $$ = new Equal($1, $3); }
 ; 
 
 %%

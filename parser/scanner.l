@@ -31,6 +31,10 @@ float64   [0-9]*\.[0-9]+
 "-"             { return yytext[0]; }
 "*"             { return yytext[0]; }
 "/"             { return yytext[0]; }
+"{"             { return yytext[0]; }
+"}"             { return yytext[0]; }
+"=="            { return P_EQ;      }
+"agar"          { return P_IF;      }
 "chiz"          { return P_CHIZ; }
 "chaap"         { return P_PRINT; }
 
