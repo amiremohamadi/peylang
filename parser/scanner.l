@@ -40,6 +40,7 @@ float64   [0-9]*\.[0-9]+
 "<"             { return P_L;       }
 ">"             { return P_G;       }
 "agar"          { return P_IF;      }
+"ta"            { return P_WHILE;   }
 "chiz"          { return P_CHIZ; }
 "chaap"         { return P_PRINT; }
 

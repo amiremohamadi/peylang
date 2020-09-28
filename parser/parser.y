@@ -59,6 +59,7 @@ void yyerror(const char *str, char chr) {
 %token             P_CHIZ   "chiz"
 %token             P_PRINT  "print"
 %token             P_IF     "agar"
+%token             P_WHILE  "ta"
 %token             P_EQ     "=="
 %token             P_NEQ    "!="
 %token             P_LEQ    "<="
@@ -67,11 +68,16 @@ void yyerror(const char *str, char chr) {
 %token             P_G      ">"
 %token             P_EOL    ";"
 
+%left P_L P_LEQ P_G P_GEQ P_EQ P_NEQ
+%left '+' '-'
+%left '*' '/'
+
 %type<exp> expression;
 %type<stmt> statement;
 %type<stmt> assignment;
 %type<stmt> print;
 %type<stmt> ifelse;
+%type<stmt> whileloop;
 %type<prog> program;
 %type<stmtlist> statementlist;
 /* %type<explist> expression_list; */
@@ -97,6 +103,7 @@ statementlist: statementlist statement { $1->push_back($2); $$ = $1; }
 statement: assignment P_EOL
          | print      P_EOL
          | ifelse
+         | whileloop 
 ;
 
 assignment: P_CHIZ P_IDENT '=' expression {
@@ -110,6 +117,9 @@ print: P_PRINT expression { $$ = new Print($2); }
 
 ifelse: P_IF expression '{' statementlist '}'
         { $$ = new IfElse($2, $4); }
+
+whileloop: P_WHILE expression '{' statementlist '}'
+         { $$ = new While($2, $4); }
 
 expression: 
           '(' expression ')' { $$ = $2; }
