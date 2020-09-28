@@ -34,6 +34,11 @@ float64   [0-9]*\.[0-9]+
 "{"             { return yytext[0]; }
 "}"             { return yytext[0]; }
 "=="            { return P_EQ;      }
+"!="            { return P_NEQ;     }
+"<="            { return P_LEQ;     }
+">="            { return P_GEQ;     }
+"<"             { return P_L;       }
+">"             { return P_G;       }
 "agar"          { return P_IF;      }
 "chiz"          { return P_CHIZ; }
 "chaap"         { return P_PRINT; }
