@@ -21,4 +21,29 @@ Object Mul::eval(Symtable &smtbl) const {
 Object Div::eval(Symtable &smtbl) const {
   return this->_left->eval(smtbl) / this->_right->eval(smtbl);
 }
+
+Object Equal::eval(Symtable &smtbl) const {
+  return this->_left->eval(smtbl) == this->_right->eval(smtbl);
+}
+
+Object NotEqual::eval(Symtable &smtbl) const {
+  return this->_left->eval(smtbl) != this->_right->eval(smtbl);
+}
+
+Object LessEqual::eval(Symtable &smtbl) const {
+  return this->_left->eval(smtbl) <= this->_right->eval(smtbl);
+}
+
+Object GreaterEqual::eval(Symtable &smtbl) const {
+  return this->_left->eval(smtbl) >= this->_right->eval(smtbl);
+}
+
+Object Less::eval(Symtable &smtbl) const {
+  return this->_left->eval(smtbl) < this->_right->eval(smtbl);
+}
+
+Object Greater::eval(Symtable &smtbl) const {
+  return this->_left->eval(smtbl) > this->_right->eval(smtbl);
+}
+
 } // namespace pey

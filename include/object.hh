@@ -31,6 +31,12 @@ public:
   Object(const double val);
 
   friend std::ostream &operator<<(std::ostream &os, const Object &obj);
+  friend bool operator==(const Object &lobj, const Object &robj);
+  friend bool operator!=(const Object &lobj, const Object &robj);
+  friend bool operator<=(const Object &lobj, const Object &robj);
+  friend bool operator>=(const Object &lobj, const Object &robj);
+  friend bool operator<(const Object &lobj, const Object &robj);
+  friend bool operator>(const Object &lobj, const Object &robj);
   Object operator+(const Object &obj) const;
   Object operator-(const Object &obj) const;
   Object operator*(const Object &obj) const;
