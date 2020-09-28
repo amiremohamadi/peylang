@@ -2,6 +2,20 @@
 #include <statement.hh>
 
 namespace pey {
+
+Statements::~Statements() {
+  for (auto stmnt : _statements)
+    delete stmnt;
+}
+
+void Statements::add(Statement *stmnt) { _statements.push_back(stmnt); }
+
+int Statements::eval(Symtable &smtbl) const {
+  for (auto stmnt : _statements)
+    stmnt->eval(smtbl);
+  return 0;
+}
+
 // assignment
 Assign::Assign(const std::string &nm, Expression *expr)
     : _ident(nm), _expr(expr) {}
@@ -26,12 +40,12 @@ int Print::eval(Symtable &smtbl) const {
 }
 
 // if else statement
-IfElse::IfElse(Expression *condition, StatementList *true_list)
+IfElse::IfElse(Expression *condition, Statements *true_list)
     : _condition(condition), _true_list(true_list),
-      _false_list(new StatementList()) {}
+      _false_list(new Statements()) {}
 
-IfElse::IfElse(Expression *condition, StatementList *true_list,
-               StatementList *false_list)
+IfElse::IfElse(Expression *condition, Statements *true_list,
+               Statements *false_list)
     : _condition(condition), _true_list(true_list), _false_list(false_list) {}
 
 IfElse::~IfElse() {
@@ -42,22 +56,17 @@ IfElse::~IfElse() {
 
 int IfElse::eval(Symtable &smtbl) const {
   // TODO: use a wrapoer class instead of list as statement list
-  if (_condition->eval(smtbl) > 0) {
-    for (auto exp : *_true_list) {
-      exp->eval(smtbl);
-    }
-  } else {
-    for (auto exp : *_false_list) {
-      exp->eval(smtbl);
-    }
-  }
+  if (_condition->eval(smtbl) > 0)
+    _true_list->eval(smtbl);
+  else
+    _false_list->eval(smtbl);
 
   // TODO: return value of exp->eval
   return 0;
 }
 
 // while loop statement
-While::While(Expression *condition, StatementList *true_list)
+While::While(Expression *condition, Statements *true_list)
     : _condition(condition), _true_list(true_list) {}
 
 While::~While() {
@@ -66,12 +75,8 @@ While::~While() {
 }
 
 int While::eval(Symtable &smtbl) const {
-  while (_condition->eval(smtbl) > 0) {
-    for (auto exp : *_true_list) {
-      exp->eval(smtbl);
-    }
-  }
-
+  while (_condition->eval(smtbl) > 0)
+    _true_list->eval(smtbl);
   return 0;
 }
 

@@ -14,6 +14,7 @@ namespace pey {
 class Expression {
 public:
   virtual Object eval(Symtable &smtbl) const = 0;
+  virtual ~Expression() {}
 };
 
 class Constant : public Expression {

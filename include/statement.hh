@@ -13,6 +13,7 @@ namespace pey {
 class Statement {
 public:
   virtual int eval(Symtable &smtbl) const = 0;
+  virtual ~Statement() {}
 };
 
 class Statements {
@@ -20,8 +21,9 @@ private:
   std::list<Statement *> _statements;
 
 public:
-  std::list<Statement *> get_statements();
-  void add(Statement *s);
+  ~Statements();
+  void add(Statement *stmnt);
+  int eval(Symtable &smtbl) const;
 };
 
 class Assign : public Statement {
@@ -45,17 +47,14 @@ public:
   int eval(Symtable &smtbl) const;
 };
 
-typedef std::list<Statement *> StatementList;
-
 class IfElse : public Statement {
 private:
   Expression *_condition;
-  StatementList *_true_list, *_false_list;
+  Statements *_true_list, *_false_list;
 
 public:
-  IfElse(Expression *condition, StatementList *true_list);
-  IfElse(Expression *condition, StatementList *true_list,
-         StatementList *false_list);
+  IfElse(Expression *condition, Statements *true_list);
+  IfElse(Expression *condition, Statements *true_list, Statements *false_list);
   ~IfElse();
   int eval(Symtable &smtbl) const;
 };
@@ -63,10 +62,10 @@ public:
 class While : public Statement {
 private:
   Expression *_condition;
-  StatementList *_true_list;
+  Statements *_true_list;
 
 public:
-  While(Expression *condition, StatementList *true_list);
+  While(Expression *condition, Statements *true_list);
   ~While();
   int eval(Symtable &smtbl) const;
 };
