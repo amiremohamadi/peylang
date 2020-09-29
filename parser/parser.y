@@ -59,6 +59,7 @@ void yyerror(const char *str, char chr) {
 %token             P_CHIZ   "chiz"
 %token             P_PRINT  "print"
 %token             P_IF     "agar"
+%token             P_ELSE   "vagarna"
 %token             P_WHILE  "ta"
 %token             P_EQ     "=="
 %token             P_NEQ    "!="
@@ -161,6 +162,9 @@ print: P_PRINT expression { $$ = new Print($2); }
 
 ifelse: P_IF expression '{' statementlist '}'
         { $$ = new IfElse($2, $4); }
+        |
+        P_IF expression '{' statementlist '}' P_ELSE '{' statementlist '}'
+        { $$ = new IfElse($2, $4, $8); }
 
 whileloop: P_WHILE expression '{' statementlist '}'
          { $$ = new While($2, $4); }

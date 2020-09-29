@@ -53,12 +53,13 @@ float64   [0-9]*\.[0-9]+
 "%="            { return P_MODEQ;   }
 
 "agar"          { return P_IF;      }
+"vagarna"       { return P_ELSE;    }
 "ta"            { return P_WHILE;   }
-"chiz"          { return P_CHIZ; }
-"chaap"         { return P_PRINT; }
+"chiz"          { return P_CHIZ;    }
+"chaap"         { return P_PRINT;   }
 
-"va"            { return P_AND; }
-"ya"            { return P_OR; }
+"va"            { return P_AND;     }
+"ya"            { return P_OR;      }
 
 {ident}   {
             yylval.ident = new char[strlen(yytext) + 1];
