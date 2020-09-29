@@ -70,11 +70,12 @@ void yyerror(const char *str, char chr) {
 %token             P_PLUSEQ "+="
 %token             P_MINEQ  "-="
 %token             P_DIVEQ   "/="
+%token             P_MODEQ   "%="
 %token             P_EOL    ";"
 
 %left P_L P_LEQ P_G P_GEQ P_EQ P_NEQ
 %left '+' '-'
-%left '*' '/'
+%left '*' '/' '%'
 
 %type<exp> expression;
 %type<stmt> statement;
@@ -144,6 +145,11 @@ assignment: P_CHIZ P_IDENT '=' expression {
             $$ = new Assign($1, new Div(new Identifier($1), $3));
             delete [] $1;
             }
+         |
+            P_IDENT P_MODEQ expression {
+            $$ = new Assign($1, new Mod(new Identifier($1), $3));
+            delete [] $1;
+            }
 ;
 
 print: P_PRINT expression { $$ = new Print($2); }
@@ -167,6 +173,7 @@ expression:
           | expression '-' expression   { $$ = new Sub($1, $3); }
           | expression '*' expression   { $$ = new Mul($1, $3); }
           | expression '/' expression   { $$ = new Div($1, $3); }
+          | expression '%' expression   { $$ = new Mod($1, $3); }
           | expression P_EQ expression  { $$ = new Equal($1, $3); }
           | expression P_NEQ expression { $$ = new NotEqual($1, $3); }
           | expression P_LEQ expression { $$ = new LessEqual($1, $3); }
