@@ -43,7 +43,6 @@ float64   [0-9]*\.[0-9]+
 "<"             { return P_L;       }
 ">"             { return P_G;       }
 
-"="             { return P_ASSIGN;  }
 "-="            { return P_MINEQ;   }
 "+="            { return P_PLUSEQ;  }
 "*="            { return P_MULEQ;   }
