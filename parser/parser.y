@@ -71,8 +71,11 @@ void yyerror(const char *str, char chr) {
 %token             P_MINEQ  "-="
 %token             P_DIVEQ   "/="
 %token             P_MODEQ   "%="
+%token             P_AND     "va"
+%token             P_OR      "ya"
 %token             P_EOL    ";"
 
+%left P_AND P_OR
 %left P_L P_LEQ P_G P_GEQ P_EQ P_NEQ
 %left '+' '-'
 %left '*' '/' '%'
@@ -181,6 +184,9 @@ expression:
           | expression P_GEQ expression { $$ = new GreaterEqual($1, $3); }
           | expression P_L expression   { $$ = new Less($1, $3); }
           | expression P_G expression   { $$ = new Greater($1, $3); }
+          
+          | expression P_AND expression   { $$ = new And($1, $3); }
+          | expression P_OR  expression   { $$ = new Or($1, $3); }
 
           | '-' expression              { $$ = new Sub(new Constant(0), $2); }
           | '+' expression              { $$ = $2; }

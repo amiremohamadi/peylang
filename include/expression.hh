@@ -113,6 +113,18 @@ public:
   virtual Object eval(Symtable &smtbl) const;
 };
 
+class And : public BinaryOperation {
+public:
+  using BinaryOperation::BinaryOperation;
+  virtual Object eval(Symtable &smtbl) const;
+};
+
+class Or : public BinaryOperation {
+public:
+  using BinaryOperation::BinaryOperation;
+  virtual Object eval(Symtable &smtbl) const;
+};
+
 typedef std::list<Expression *> ExpressionList;
 
 } // namespace pey
