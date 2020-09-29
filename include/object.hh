@@ -3,6 +3,7 @@
 #ifndef OBJECT_HH_
 #define OBJECT_HH_
 
+#include <exception>
 #include <iostream>
 
 namespace pey {
@@ -41,6 +42,7 @@ public:
   Object operator-(const Object &obj) const;
   Object operator*(const Object &obj) const;
   Object operator/(const Object &obj) const;
+  Object operator%(const Object &obj) const;
 };
 
 } // namespace pey

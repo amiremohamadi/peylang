@@ -32,6 +32,7 @@ float64   [0-9]*\.[0-9]+
 "-"             { return yytext[0]; }
 "*"             { return yytext[0]; }
 "/"             { return yytext[0]; }
+"%"             { return yytext[0]; }
 
 "{"             { return yytext[0]; }
 "}"             { return yytext[0]; }
@@ -47,6 +48,7 @@ float64   [0-9]*\.[0-9]+
 "+="            { return P_PLUSEQ;  }
 "*="            { return P_MULEQ;   }
 "/="            { return P_DIVEQ;   }
+"%="            { return P_MODEQ;   }
 
 "agar"          { return P_IF;      }
 "ta"            { return P_WHILE;   }
