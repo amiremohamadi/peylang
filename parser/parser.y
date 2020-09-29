@@ -66,6 +66,11 @@ void yyerror(const char *str, char chr) {
 %token             P_GEQ    ">="
 %token             P_L      "<"
 %token             P_G      ">"
+%token             P_ASSIGN "="
+%token             P_MULEQ  "*="
+%token             P_PLUSEQ "+="
+%token             P_MINEQ  "-="
+%token             P_DIVEQ   "/="
 %token             P_EOL    ";"
 
 %left P_L P_LEQ P_G P_GEQ P_EQ P_NEQ
@@ -109,7 +114,27 @@ statement: assignment P_EOL
 assignment: P_CHIZ P_IDENT '=' expression {
             $$ = new Assign($2, $4);
             delete [] $2;
-          }
+            }
+          |
+            P_IDENT P_PLUSEQ expression {
+            $$ = new Assign($1, new Sum(new Identifier($1), $3));
+            delete [] $1;
+            }
+          |
+            P_IDENT P_MINEQ expression {
+            $$ = new Assign($1, new Sub(new Identifier($1), $3));
+            delete [] $1;
+            }           
+          |
+            P_IDENT P_MULEQ expression {
+            $$ = new Assign($1, new Mul(new Identifier($1), $3));
+            delete [] $1;
+            }
+          |
+            P_IDENT P_DIVEQ expression {
+            $$ = new Assign($1, new Div(new Identifier($1), $3));
+            delete [] $1;
+            }
 ;
 
 print: P_PRINT expression { $$ = new Print($2); }
