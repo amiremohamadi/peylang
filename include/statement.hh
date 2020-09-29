@@ -4,6 +4,7 @@
 #ifndef STATEMENT_HH_
 #define STATEMENT_HH_
 
+#include <exception>
 #include <expression.hh>
 #include <list>
 #include <symtable.hh>
@@ -26,6 +27,15 @@ public:
   int eval(Symtable &smtbl) const;
 };
 
+class Define : public Statement {
+private:
+  std::string _ident;
+
+public:
+  Define(const std::string &ident);
+  int eval(Symtable &smtbl) const;
+};
+
 class Assign : public Statement {
 private:
   std::string _ident;
@@ -34,6 +44,17 @@ private:
 public:
   Assign(const std::string &nm, Expression *expr);
   ~Assign();
+  int eval(Symtable &smtbl) const;
+};
+
+class DefAssign : public Statement {
+private:
+  std::string _ident;
+  Expression *_expr;
+
+public:
+  DefAssign(const std::string &ident, Expression *expr);
+  ~DefAssign();
   int eval(Symtable &smtbl) const;
 };
 

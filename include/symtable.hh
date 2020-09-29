@@ -16,6 +16,7 @@ private:
 
 public:
   Object &operator[](std::string ident);
+  int count(std::string ident);
 };
 
 } // namespace pey

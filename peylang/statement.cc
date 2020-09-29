@@ -16,6 +16,14 @@ int Statements::eval(Symtable &smtbl) const {
   return 0;
 }
 
+// Define (to define a variable)
+Define::Define(const std::string &ident) : _ident(ident) {}
+
+int Define::eval(Symtable &smtbl) const {
+  smtbl[this->_ident];
+  return 0;
+}
+
 // assignment
 Assign::Assign(const std::string &nm, Expression *expr)
     : _ident(nm), _expr(expr) {}
@@ -23,6 +31,24 @@ Assign::Assign(const std::string &nm, Expression *expr)
 Assign::~Assign() { delete this->_expr; }
 
 int Assign::eval(Symtable &smtbl) const {
+  if (smtbl.count(this->_ident) == 0) {
+    throw std::runtime_error("variable " + _ident + " not defined");
+  }
+
+  Object &obj = smtbl[this->_ident];
+  obj = this->_expr->eval(smtbl);
+
+  /* smtbl[this->_ident] = this->_expr->eval(smtbl); */
+  return 0;
+}
+
+// Define and Assign in one line
+DefAssign::DefAssign(const std::string &ident, Expression *expr)
+    : _ident(ident), _expr(expr) {}
+
+DefAssign::~DefAssign() { delete this->_expr; }
+
+int DefAssign::eval(Symtable &smtbl) const {
   smtbl[this->_ident] = this->_expr->eval(smtbl);
   return 0;
 }

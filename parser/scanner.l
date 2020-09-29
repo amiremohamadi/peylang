@@ -26,19 +26,28 @@ float64   [0-9]*\.[0-9]+
 [ \t\n]         { /*whitespaces*/ }
 "--"[^\r\n]*    { /*comments*/ }
 ";"             { return P_EOL; }
+
 "="             { return yytext[0]; }
 "+"             { return yytext[0]; }
 "-"             { return yytext[0]; }
 "*"             { return yytext[0]; }
 "/"             { return yytext[0]; }
+
 "{"             { return yytext[0]; }
 "}"             { return yytext[0]; }
+
 "=="            { return P_EQ;      }
 "!="            { return P_NEQ;     }
 "<="            { return P_LEQ;     }
 ">="            { return P_GEQ;     }
 "<"             { return P_L;       }
 ">"             { return P_G;       }
+
+"-="            { return P_MINEQ;   }
+"+="            { return P_PLUSEQ;  }
+"*="            { return P_MULEQ;   }
+"/="            { return P_DIVEQ;   }
+
 "agar"          { return P_IF;      }
 "ta"            { return P_WHILE;   }
 "chiz"          { return P_CHIZ; }
