@@ -76,6 +76,7 @@ void yyerror(const char *str, char chr) {
 %left P_L P_LEQ P_G P_GEQ P_EQ P_NEQ
 %left '+' '-'
 %left '*' '/' '%'
+%nonassoc UMINUS  "unary minus"
 
 %type<exp> expression;
 %type<stmt> statement;
@@ -180,6 +181,11 @@ expression:
           | expression P_GEQ expression { $$ = new GreaterEqual($1, $3); }
           | expression P_L expression   { $$ = new Less($1, $3); }
           | expression P_G expression   { $$ = new Greater($1, $3); }
+
+          | '-' expression              { $$ = new Sub(new Constant(0), $2); }
+          | '+' expression              { $$ = $2; }
+
+
 ; 
 
 %%
