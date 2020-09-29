@@ -31,6 +31,9 @@ public:
   Object(const int val);
   Object(const double val);
 
+  bool and_(const Object &obj) const;
+  bool or_(const Object &obj) const;
+
   friend std::ostream &operator<<(std::ostream &os, const Object &obj);
   friend bool operator==(const Object &lobj, const Object &robj);
   friend bool operator!=(const Object &lobj, const Object &robj);

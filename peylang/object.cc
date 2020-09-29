@@ -8,6 +8,16 @@ Object::Object(const int val) : _val(val), _type(INT) {}
 
 Object::Object(const double val) : _val(val), _type(FLOAT) {}
 
+bool Object::and_(const Object &obj) const {
+  return (_type == INT ? _val._int : _val._float) &&
+         (obj._type == INT ? obj._val._int : obj._val._float);
+}
+
+bool Object::or_(const Object &obj) const {
+  return (_type == INT ? _val._int : _val._float) ||
+         (obj._type == INT ? obj._val._int : obj._val._float);
+}
+
 std::ostream &operator<<(std::ostream &os, const Object &obj) {
   return os << (obj._type == INT ? obj._val._int : obj._val._float);
 }

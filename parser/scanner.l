@@ -57,6 +57,9 @@ float64   [0-9]*\.[0-9]+
 "chiz"          { return P_CHIZ; }
 "chaap"         { return P_PRINT; }
 
+"va"            { return P_AND; }
+"ya"            { return P_OR; }
+
 {ident}   {
             yylval.ident = new char[strlen(yytext) + 1];
             strcpy(yylval.ident, yytext);

@@ -50,4 +50,12 @@ Object Greater::eval(Symtable &smtbl) const {
   return this->_left->eval(smtbl) > this->_right->eval(smtbl);
 }
 
+Object And::eval(Symtable &smtbl) const {
+  return this->_left->eval(smtbl).and_(this->_right->eval(smtbl));
+}
+
+Object Or::eval(Symtable &smtbl) const {
+  return this->_left->eval(smtbl).or_(this->_right->eval(smtbl));
+}
+
 } // namespace pey
