@@ -28,7 +28,32 @@ ta folan < 20 {
 }
 ```
 
-## Installation from source
+## Installing Peylang
+### Windows
+On Windows machines, you can use [PeySetup](https://github.com/amiremohamadi/peylang/releases/download/0.0.4/PeySetup.exe).
+<br/>
+Don't forget to restart your machine after installing. Then open cmd and type:
+```
+peyman your_file_name.pey
+```
+
+If it didn't recognize the command, add it manually to PATH variables and retry.
+
+### Linux
+On linux machines, download [this](https://github.com/amiremohamadi/peylang/releases/download/0.0.4/peyman).
+<br/>
+Don't forget ```chmod +x peyman```
+
+### Docker
+Also you can use docker to build and use Peylang!
+```
+git clone https://github.com/amiremohamadi/peylang.git
+cd peylang
+docker build -t peylang .
+docker run -it peylang
+```
+
+### From source
 
 ~~we use cmake as build system~~ not anymore!
 
