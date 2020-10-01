@@ -36,6 +36,10 @@ agar (folan > 10 va folan < 20) ya folan == 40 {
 You can find more samples [here](https://github.com/amiremohamadi/peylang/tree/0.0.4/test/samples).
 
 
+## Syntax Highlighter
+- [vim](https://github.com/amiremohamadi/peylang/blob/master/.vim/syntax/pey.vim) highlighter
+- [vscode](https://marketplace.visualstudio.com/items?itemName=peylang.peylang) highlighter
+
 ## Installing Peylang
 ### Windows
 On Windows machines, you can use [PeySetup](https://github.com/amiremohamadi/peylang/releases/download/0.0.4/PeySetup.exe).
