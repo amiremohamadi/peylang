@@ -14,6 +14,8 @@ using namespace pey;
 %{
 
 #include <iostream>
+#include <cstring>
+#include <string>
 
 using std::cerr;
 using std::endl;
@@ -28,14 +30,23 @@ int parse_result = 1;
 
 void yyerror(const char *str) {
     // check error flag to supress duplicate message (actually it's bison stuff)
+    // custom error messages
+    if (!strcmp(str, "syntax error, unexpected ident")) {
+        str = "in chie neveshti? :\\ syntax ro check kon";
+    } else if (!strcmp(str, "syntax error, unexpected ident, expecting ;")) {
+        str = "semicolon nazashti :\\";
+    }
     if (!error) 
-        cerr << "MARG! khatt'e " << yylineno << " eshtebahe! "
+        cerr << "Hoy! khate " << yylineno << " moshkel dare; "
              << str << endl;
 }
 
 void yyerror(const char *str, char chr) {
-    cerr << "MARG! khatt'e " << yylineno << " eshtebahe! " 
-         << str << "\"" << chr << "\"" << endl;
+    if (!strcmp(str, "bad token")) {
+        str = " ro nemishnasam";
+    }
+    cerr << "Hoy! khatt'e " << yylineno << " eshtebahe! " 
+         << "\"" << chr << "\"" << str << endl;
     // set error flag to be used in yyerror(const char *str) function
     error = true;
 }
