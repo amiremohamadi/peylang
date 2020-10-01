@@ -26,7 +26,15 @@ ta folan < 20 {
    
    folan += 1;
 }
+
+-- logical and or
+agar (folan > 10 va folan < 20) ya folan == 40 {
+    chaap 200;
+}
 ```
+
+You can find more samples [here](https://github.com/amiremohamadi/peylang/tree/0.0.4/test/samples).
+
 
 ## Installing Peylang
 ### Windows
