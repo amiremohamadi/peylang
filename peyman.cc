@@ -31,7 +31,9 @@ int main(int argc, char **argv) {
            `o 
 		)"
               << "\n";
-    std::cout << "Peyman programming language " << VERSION << "\n\n";
+    std::cout << "Peyman programming language " << VERSION << "\n";
+    std::cout << "WARNING: INTERACTIVE MODE IS BUGGY YET, TRY THIS INSTEAD:\n"
+              << "usage: peyman file_name.pey\n\n";
   }
   yyparse();
 
