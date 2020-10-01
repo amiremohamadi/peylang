@@ -1,0 +1,15 @@
+-- barnameye tabdile decimal be binary
+
+chiz adad = 10; -- adadi ke mikham binary konam
+chiz natije = 0; -- natije ro ham tooye in zakhore mikonam
+chiz arzesh = 1; -- arzesh makani
+
+ta adad > 0 {
+    natije = (adad % 2) * arzesh + natije;
+    -- adad nesf mishe va arzesh makani 10 barabar
+    adad /= 2;
+    arzesh *= 10;
+}
+
+chaap natije;
+

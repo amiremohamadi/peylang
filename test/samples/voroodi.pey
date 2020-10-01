@@ -1,0 +1,11 @@
+-- voroodi az stdin
+
+chiz adad;
+begir adad;
+
+-- chaap adadhaye koochiktar az adad
+chiz i;
+ta i < adad {
+    chaap i;
+    i += 1;
+}

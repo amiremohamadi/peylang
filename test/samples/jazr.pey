@@ -1,0 +1,14 @@
+-- formule Babylonian baraye mohasebeye jazr
+chiz adad = 9;
+
+-- yek hadse avaliye dar nazar migirim va har marhale
+-- be javab nazdiktar mikonim
+chiz hads = 10;
+
+chiz i = 100; -- 100 bar farayand ro tekrar konim
+ta i >= 0 {
+    hads = (hads + adad/hads) / 2;
+    i = i-1;
+}
+
+chaap hads;

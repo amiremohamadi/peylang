@@ -1,0 +1,25 @@
+-- chaape adadhaye avvale kamtar az n
+
+chiz n = 20;
+chiz i = 2;
+
+ta i < n {
+    -- bebin avval hast ya na
+    chiz j = 2;
+    chiz prime = 1; -- pishfarz ine ke j avvale, magar inke rad beshe
+    ta j < i {
+        agar i % j == 0 {
+            -- yani avval nist
+            prime = 0;
+        }
+        j += 2;
+    }
+
+    -- age prime bood chaap kon
+    agar prime {
+        chaap i;
+    }
+
+    -- boro adade badi
+    i += 1;
+}

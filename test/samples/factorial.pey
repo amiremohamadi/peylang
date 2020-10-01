@@ -1,0 +1,12 @@
+-- mohasebeye factorial
+
+chiz adad = 5;
+chiz natije = 1;
+
+ta adad >= 2
+{
+    natije *= adad;
+    adad -= 1;
+}
+
+chaap natije;

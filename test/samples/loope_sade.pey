@@ -1,0 +1,9 @@
+-- loop e sade :D
+
+chiz i = 0;
+
+ta i < 10
+{
+    chaap i;
+    i += 1;
+}
