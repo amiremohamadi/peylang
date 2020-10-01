@@ -4,7 +4,7 @@
 #ifndef STATEMENT_HH_
 #define STATEMENT_HH_
 
-#include <exception>
+#include <exception.hh>
 #include <expression.hh>
 #include <list>
 #include <symtable.hh>

@@ -124,6 +124,9 @@ Object Object::operator/(const Object &obj) const {
     case FLOAT:
       return Object(_val._int / obj._val._float);
     case INT:
+      // divide by zero exception
+      if (obj._val._int == 0)
+        throw DivByZero();
       return Object(_val._int / obj._val._int);
     }
 
@@ -142,7 +145,10 @@ Object Object::operator/(const Object &obj) const {
 Object Object::operator%(const Object &obj) const {
   // TODO: float numbers doesn't have mod operator
   if (_type == FLOAT || obj._type == FLOAT)
-    throw std::runtime_error("mod on float?");
+    throw ModOnFloat();
+
+  if (obj._val._int == 0)
+    throw ModByZero();
 
   return Object(_val._int % obj._val._int);
 }
