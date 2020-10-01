@@ -33,7 +33,7 @@ void yyerror(const char *str) {
     // custom error messages
     if (!strcmp(str, "syntax error, unexpected ident")) {
         str = "in chie neveshti? :\\ syntax ro check kon";
-    } else if (!strcmp(str, "syntax error, unexpected ident, expecting ;")) {
+    } else if (strstr(str, "expecting ;")) {
         str = "semicolon nazashti :\\";
     }
     if (!error) 
