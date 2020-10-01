@@ -3,6 +3,7 @@
 #ifndef OBJECT_HH_
 #define OBJECT_HH_
 
+#include <exception.hh>
 #include <exception>
 #include <iostream>
 

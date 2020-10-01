@@ -32,7 +32,7 @@ Assign::~Assign() { delete this->_expr; }
 
 int Assign::eval(Symtable &smtbl) const {
   if (smtbl.count(this->_ident) == 0) {
-    throw std::runtime_error("variable " + _ident + " not defined");
+    throw UnboundIdent(_ident);
   }
 
   Object &obj = smtbl[this->_ident];
