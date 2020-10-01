@@ -2,6 +2,32 @@
 
 A programming language to honor our beloved friend, Peyman.
 
+## Sample
+```
+-- in yek commente :D
+
+-- ba chiz moteghayer tarif mikonim
+chiz folan = 12;
+
+-- injoori print mishe
+chaap folan;
+
+-- injoori voroodi migire
+begir folan;
+
+-- while loop ham dare
+ta folan < 20 {
+   -- if else ham dare
+   agar folan % 2 == 0 {
+      chaap 1;
+   } vagarna {
+      chaap 0;
+   }
+   
+   folan += 1;
+}
+```
+
 ## Installation from source
 
 ~~we use cmake as build system~~ not anymore!
