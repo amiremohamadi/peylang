@@ -26,9 +26,46 @@ ta folan < 20 {
    
    folan += 1;
 }
+
+-- logical and or
+agar (folan > 10 va folan < 20) ya folan == 40 {
+    chaap 200;
+}
 ```
 
-## Installation from source
+You can find more samples [here](https://github.com/amiremohamadi/peylang/tree/0.0.4/test/samples).
+
+
+## Syntax Highlighter
+- [vim](https://github.com/amiremohamadi/peylang/blob/master/.vim/syntax/pey.vim) highlighter
+- [vscode](https://marketplace.visualstudio.com/items?itemName=peylang.peylang) highlighter
+
+## Installing Peylang
+### Windows
+On Windows machines, you can use [PeySetup](https://github.com/amiremohamadi/peylang/releases/download/0.0.4/PeySetup.exe).
+<br/>
+Don't forget to restart your machine after installing. Then open cmd and type:
+```
+peyman your_file_name.pey
+```
+
+If it didn't recognize the command, add it manually to PATH variables and retry.
+
+### Linux
+On linux machines, download [this](https://github.com/amiremohamadi/peylang/releases/download/0.0.4/peyman).
+<br/>
+Don't forget ```chmod +x peyman```
+
+### Docker
+Also you can use docker to build and use Peylang!
+```
+git clone https://github.com/amiremohamadi/peylang.git
+cd peylang
+docker build -t peylang .
+docker run -it peylang
+```
+
+### From source
 
 ~~we use cmake as build system~~ not anymore!
 
@@ -57,6 +94,3 @@ $ cd peylang
 $ make
 $ ./peyman
 ```
-
-You can run tests using `ctest` or 'make test'
-
