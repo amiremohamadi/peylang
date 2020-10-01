@@ -1,6 +1,7 @@
 #ifndef PROGRAM_HH_
 #define PROGRAM_HH_
 
+#include <iostream>
 #include <list>
 #include <statement.hh>
 #include <symtable.hh>
