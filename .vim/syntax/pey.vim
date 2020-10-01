@@ -8,7 +8,7 @@ endif
 
 " Keywords
 syn keyword	pType chiz 
-syn keyword	pStatement chaap agar ta
+syn keyword	pStatement chaap agar vagarna begir ta va ya
 
 syn match   pComment '--.*$'    display
 syn match   pInteger '\d\+'     display
