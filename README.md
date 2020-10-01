@@ -90,6 +90,3 @@ $ cd peylang
 $ make
 $ ./peyman
 ```
-
-You can run tests using `ctest` or 'make test'
-
