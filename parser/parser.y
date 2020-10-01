@@ -69,6 +69,7 @@ void yyerror(const char *str, char chr) {
 %token<ident>      P_IDENT  "ident"
 %token             P_CHIZ   "chiz"
 %token             P_PRINT  "print"
+%token             P_INPUT  "input"
 %token             P_IF     "agar"
 %token             P_ELSE   "vagarna"
 %token             P_WHILE  "ta"
@@ -97,6 +98,7 @@ void yyerror(const char *str, char chr) {
 %type<stmt> statement;
 %type<stmt> assignment;
 %type<stmt> print;
+%type<stmt> input;
 %type<stmt> ifelse;
 %type<stmt> whileloop;
 %type<prog> program;
@@ -123,6 +125,7 @@ statementlist: statementlist statement { $1->add($2); $$ = $1; }
 
 statement: assignment P_EOL
          | print      P_EOL
+         | input      P_EOL
          | ifelse
          | whileloop 
 ;
@@ -169,6 +172,9 @@ assignment: P_CHIZ P_IDENT '=' expression {
 ;
 
 print: P_PRINT expression { $$ = new Print($2); }
+;
+
+input: P_INPUT P_IDENT { $$ = new Input($2); delete [] $2; }
 ;
 
 ifelse: P_IF expression '{' statementlist '}'

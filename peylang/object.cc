@@ -22,6 +22,28 @@ std::ostream &operator<<(std::ostream &os, const Object &obj) {
   return os << (obj._type == INT ? obj._val._int : obj._val._float);
 }
 
+std::istream &operator>>(std::istream &is, Object &obj) {
+  auto float_regex = std::regex("[0-9]*\\.[0-9]+");
+  auto int_regex = std::regex("[0-9]+");
+
+  std::string input;
+  std::cin >> input;
+
+  // type checking
+  if (std::regex_match(input, float_regex)) {
+    obj._val = Value(std::stod(input));
+    obj._type = FLOAT;
+  } else if (std::regex_match(input, int_regex)) {
+    obj._val = Value(std::stoi(input));
+    obj._type = INT;
+  } else {
+    // throw
+    // exception
+  }
+
+  return is;
+}
+
 bool operator==(const Object &lobj, const Object &robj) {
   return (lobj._type == INT ? lobj._val._int : lobj._val._float) ==
          (robj._type == INT ? robj._val._int : robj._val._float);

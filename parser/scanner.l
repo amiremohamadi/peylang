@@ -57,6 +57,7 @@ float64   [0-9]*\.[0-9]+
 "ta"            { return P_WHILE;   }
 "chiz"          { return P_CHIZ;    }
 "chaap"         { return P_PRINT;   }
+"begir"         { return P_INPUT;   }
 
 "va"            { return P_AND;     }
 "ya"            { return P_OR;      }

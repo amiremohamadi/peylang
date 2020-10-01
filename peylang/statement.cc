@@ -65,6 +65,20 @@ int Print::eval(Symtable &smtbl) const {
   return 0;
 }
 
+// input statement
+Input::Input(std::string ident) : _ident(ident) {}
+
+int Input::eval(Symtable &smtbl) const {
+  // check if the object is defined
+  if (smtbl.count(_ident) == 0)
+    throw UnboundIdent(_ident);
+
+  Object &obj = smtbl[_ident];
+  std::cin >> obj;
+
+  return 0;
+}
+
 // if else statement
 IfElse::IfElse(Expression *condition, Statements *true_list)
     : _condition(condition), _true_list(true_list),

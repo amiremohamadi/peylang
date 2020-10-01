@@ -6,6 +6,8 @@
 #include <exception.hh>
 #include <exception>
 #include <iostream>
+#include <regex>
+#include <string>
 
 namespace pey {
 
@@ -36,6 +38,7 @@ public:
   bool or_(const Object &obj) const;
 
   friend std::ostream &operator<<(std::ostream &os, const Object &obj);
+  friend std::istream &operator>>(std::istream &is, Object &obj);
   friend bool operator==(const Object &lobj, const Object &robj);
   friend bool operator!=(const Object &lobj, const Object &robj);
   friend bool operator<=(const Object &lobj, const Object &robj);

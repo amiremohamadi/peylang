@@ -68,6 +68,15 @@ public:
   int eval(Symtable &smtbl) const;
 };
 
+class Input : public Statement {
+private:
+  std::string _ident;
+
+public:
+  Input(std::string ident);
+  int eval(Symtable &smtbl) const;
+};
+
 class IfElse : public Statement {
 private:
   Expression *_condition;
