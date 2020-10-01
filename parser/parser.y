@@ -30,23 +30,28 @@ int parse_result = 1;
 
 void yyerror(const char *str) {
     // check error flag to supress duplicate message (actually it's bison stuff)
+
     // custom error messages
-    if (!strcmp(str, "syntax error, unexpected ident")) {
-        str = "in chie neveshti? :\\ syntax ro check kon";
-    } else if (strstr(str, "expecting ;")) {
+    if (strstr(str, "expecting ;")) {
         str = "semicolon nazashti :\\";
+    } else if (strstr(str, "syntax error, unexpected")) {
+        str = "in chie neveshti? :\\ syntax ro check kon";
     }
+
     if (!error) 
         cerr << "Hoy! khate " << yylineno << " moshkel dare; "
              << str << endl;
 }
 
 void yyerror(const char *str, char chr) {
+    // custom error message
     if (!strcmp(str, "bad token")) {
         str = " ro nemishnasam";
     }
+
     cerr << "Hoy! khatt'e " << yylineno << " eshtebahe! " 
          << "\"" << chr << "\"" << str << endl;
+
     // set error flag to be used in yyerror(const char *str) function
     error = true;
 }
