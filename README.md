@@ -37,6 +37,8 @@ You can find more samples [here](https://github.com/amiremohamadi/peylang/tree/0
 
 
 ## Syntax Highlighter
+<img src="https://github.com/amiremohamadi/peylang/blob/master/screen-shot.png?raw=true" width="450">
+
 - [vim](https://github.com/amiremohamadi/peylang/blob/master/.vim/syntax/pey.vim) highlighter
 - [vscode](https://marketplace.visualstudio.com/items?itemName=peylang.peylang) highlighter
 
