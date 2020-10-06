@@ -172,6 +172,8 @@ Object Object::operator+(const Object &obj) const {
     return IntType::add(*this, obj);
   case FLOAT:
     return FloatType::add(*this, obj);
+  case STRING:
+    return StringType::add(*this, obj);
   }
   throw InvalidOperand(type_name(_type), type_name(obj._type), "+");
 }
@@ -526,6 +528,23 @@ bool FloatType::greater(const Object &left, const Object &right) {
     return left._float > right._float;
   default:
     throw InvalidOperand(type_name(left._type), type_name(right._type), ">");
+  }
+}
+
+// string
+
+std::string StringType::stringify(std::string str) { return "'" + str + "'"; }
+
+Object StringType::add(const Object &left, const Object &right) {
+#ifdef DEBUG
+  assert(left._type == STRING);
+#endif
+
+  switch (right._type) {
+  case STRING:
+    return Object(stringify(left._string + right._string));
+  default:
+    throw InvalidOperand(type_name(left._type), type_name(right._type), "+");
   }
 }
 
