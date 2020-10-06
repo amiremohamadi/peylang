@@ -3,6 +3,7 @@
 namespace pey {
 
 std::string type_name(int type) {
+  // helper funciotn to retrieve and get type_name as a string
   std::string result;
   switch (type) {
   case INT:
@@ -20,6 +21,9 @@ std::string type_name(int type) {
   return result;
 }
 
+// Object declarations
+
+// copy method is needed by copy constructor and assignment
 void Object::_copy(const Object &obj) {
   switch (obj._type) {
   case INT:
@@ -38,34 +42,13 @@ void Object::_copy(const Object &obj) {
   _type = obj._type;
 }
 
+// TODO: is it need to destroy string?
 void Object::_destroy() {
   // handle string in this case
   if (_type == STRING) {
     using std::string; // necessary to compile with clang
     _string.~string();
   }
-}
-
-Object::~Object() { _destroy(); }
-
-Object::Object() : _int(0), _type(INT) {}
-
-Object::Object(const Object &obj) { _copy(obj); }
-
-Object::Object(const int val) : _int(val), _type(INT) {}
-
-Object::Object(const double val) : _float(val), _type(FLOAT) {}
-
-Object::Object(const std::string val) : _type(STRING) {
-  new (&_string) std::string(val);
-  _string.erase(_string.begin());
-  _string.erase(_string.end() - 1);
-}
-
-Object::Object(const char *val) : _type(STRING) {
-  new (&_string) std::string(val);
-  _string.erase(_string.begin());
-  _string.erase(_string.end() - 1);
 }
 
 Object &Object::operator=(const Object &obj) {
@@ -75,16 +58,6 @@ Object &Object::operator=(const Object &obj) {
     _copy(obj); // hello new value
   }
   return *this;
-}
-
-bool Object::and_(const Object &obj) const {
-  return (_type == INT ? _int : _float) &&
-         (obj._type == INT ? obj._int : obj._float);
-}
-
-bool Object::or_(const Object &obj) const {
-  return (_type == INT ? _int : _float) ||
-         (obj._type == INT ? obj._int : obj._float);
 }
 
 std::ostream &operator<<(std::ostream &os, const Object &obj) {
@@ -118,10 +91,19 @@ std::istream &operator>>(std::istream &is, Object &obj) {
     obj._type = INT;
   } else {
     // throw
-    // exception
   }
 
   return is;
+}
+
+bool Object::logic_and(const Object &obj) const {
+  return (_type == INT ? _int : _float) &&
+         (obj._type == INT ? obj._int : obj._float);
+}
+
+bool Object::logic_or(const Object &obj) const {
+  return (_type == INT ? _int : _float) ||
+         (obj._type == INT ? obj._int : obj._float);
 }
 
 bool operator==(const Object &lobj, const Object &robj) {
