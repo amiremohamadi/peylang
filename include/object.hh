@@ -14,11 +14,13 @@ namespace pey {
 typedef enum Type {
   INT,
   FLOAT,
+  STRING,
 } Type;
 
 typedef union Value {
   int _int;
   double _float;
+  std::string _string;
   Value(int i) : _int(i) {}
   Value(double f) : _float(f) {}
 } Value;
@@ -27,12 +29,29 @@ class Object {
   // all types of data represent as object
 private:
   Type _type;
-  Value _val;
+  union {
+    int _int;
+    double _float;
+    std::string _string;
+  };
+
+  /* Value _val; */
+
+  // special methods to be used in complicated data types
+  void _copy(const Object &obj);
+  void _destroy();
 
 public:
+  ~Object();
   Object();
+  Object(const Object &obj);
   Object(const int val);
   Object(const double val);
+  Object(const std::string val);
+  Object(const char *val);
+
+  // assignment
+  Object &operator=(const Object &obj);
 
   bool and_(const Object &obj) const;
   bool or_(const Object &obj) const;

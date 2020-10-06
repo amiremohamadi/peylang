@@ -61,6 +61,7 @@ void yyerror(const char *str, char chr) {
 %union {
     int integer;
     double float64;
+    char *str;
     char *ident;
     Expression *exp;
     Statement *stmt;
@@ -71,6 +72,7 @@ void yyerror(const char *str, char chr) {
 
 %token<integer>    P_INT    "integer"
 %token<float64>    P_FLOAT  "float64"
+%token<str>        P_STR    "string"
 %token<ident>      P_IDENT  "ident"
 %token             P_CHIZ   "chiz"
 %token             P_PRINT  "print"
@@ -195,10 +197,8 @@ expression:
           '(' expression ')' { $$ = $2; }
           | P_INT   { $$ = new Constant($1); }
           | P_FLOAT { $$ = new Constant($1); }
-          | P_IDENT {
-                        $$ = new Identifier($1);
-                        delete [] $1;
-                    }
+          | P_STR   { $$ = new Constant($1); delete [] $1; }
+          | P_IDENT { $$ = new Identifier($1); delete [] $1; }
           | expression '+' expression   { $$ = new Sum($1, $3); }
           | expression '-' expression   { $$ = new Sub($1, $3); }
           | expression '*' expression   { $$ = new Mul($1, $3); }
