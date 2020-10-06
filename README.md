@@ -27,6 +27,12 @@ ta folan < 20 {
    folan += 1;
 }
 
+-- string
+chaap 'salam donya!';
+
+chiz esm = 'peyman';
+chaap esm + ' khar ast';
+
 -- logical and or
 agar (folan > 10 va folan < 20) ya folan == 40 {
     chaap 200;

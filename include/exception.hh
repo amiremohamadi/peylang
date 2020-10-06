@@ -39,4 +39,11 @@ public:
   ModOnFloat() : ParseException("baghimandeye adad ashari akhe?") {}
 };
 
+class InvalidOperand : public ParseException {
+public:
+  InvalidOperand(std::string typel, std::string typer, std::string op)
+      : ParseException("operatore " + op + " rooye " + typel + ", " + typer +
+                       " tarif nashode.") {}
+};
+
 #endif // EXCEPTION_HH_
