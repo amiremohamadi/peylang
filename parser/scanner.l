@@ -20,7 +20,7 @@ extern void yyerror(const char*, char);
 ident     [_a-zA-Z][_0-9a-zA-Z]*
 integer   [0-9]+
 float64   [0-9]*\.[0-9]+
-str       \"(\\.|[^\\"])*\" 
+str       '(\\.|[^\\'])*'
 
 %%
 
