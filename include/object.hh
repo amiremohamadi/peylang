@@ -28,6 +28,7 @@ class Object {
   // all types of data represent as object
   friend class IntType;
   friend class FloatType;
+  friend class StringType;
 
 private:
   Type _type;
@@ -52,9 +53,17 @@ public:
   // Object represents any data-type, so we have a constructor for each
   Object() : _int(0), _type(INT) {}
   Object(const Object &obj) { _copy(obj); }
+
   Object(const int val) : _int(val), _type(INT) {}
   Object(const double val) : _float(val), _type(FLOAT) {}
-  Object(const char *val) : _type(STRING) { new (&_string) std::string(val); }
+
+  Object(const char *val) : _type(STRING) {
+    new (&_string) std::string(val);
+    // remove quotes from sides of string
+    _string.erase(_string.begin());
+    _string.erase(_string.end() - 1);
+  }
+
   Object(const std::string val) : Object(val.c_str()) {}
 
   // assignment, is needed in symbol table
@@ -113,6 +122,15 @@ public:
   static bool greater_equal(const Object &left, const Object &right);
   static bool less(const Object &left, const Object &right);
   static bool greater(const Object &left, const Object &right);
+};
+
+class StringType {
+  // utils fr string value
+private:
+  static std::string stringify(std::string str);
+
+public:
+  static Object add(const Object &left, const Object &right);
 };
 
 } // namespace pey
