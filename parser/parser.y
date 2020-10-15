@@ -80,6 +80,7 @@ void yyerror(const char *str, char chr) {
 %token             P_IF     "agar"
 %token             P_ELSE   "vagarna"
 %token             P_WHILE  "ta"
+%token             P_LEN    "andaze"
 %token             P_EQ     "=="
 %token             P_NEQ    "!="
 %token             P_LEQ    "<="
@@ -216,6 +217,8 @@ expression:
 
           | '-' expression              { $$ = new Sub(new Constant(0), $2); }
           | '+' expression              { $$ = $2; }
+
+          | P_LEN '(' expression ')'    { $$ = new Len($3); }
 
 
 ; 
