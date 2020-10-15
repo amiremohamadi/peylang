@@ -39,6 +39,8 @@ str       '(\\.|[^\\'])*'
 "}"             { return yytext[0]; }
 "("             { return yytext[0]; }
 ")"             { return yytext[0]; }
+"["             { return yytext[0]; }
+"]"             { return yytext[0]; }
 
 "=="            { return P_EQ;      }
 "!="            { return P_NEQ;     }
