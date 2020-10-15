@@ -1,6 +1,11 @@
 #include <expression.hh>
 
 namespace pey {
+
+Object Len::eval(Symtable &smtbl) const {
+  return this->_exp->eval(smtbl).length();
+}
+
 BinaryOperation::~BinaryOperation() {
   delete this->_left;
   delete this->_right;
