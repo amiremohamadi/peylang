@@ -87,6 +87,8 @@ public:
   Object operator*(const Object &obj) const;
   Object operator/(const Object &obj) const;
   Object operator%(const Object &obj) const;
+
+  Object length() const;
 };
 
 // Type Classes
@@ -131,6 +133,7 @@ private:
 
 public:
   static Object add(const Object &left, const Object &right);
+  static Object length(const Object &obj);
 };
 
 } // namespace pey
