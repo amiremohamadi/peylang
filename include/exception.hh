@@ -46,4 +46,9 @@ public:
                        " tarif nashode.") {}
 };
 
+class NotIterable : public ParseException {
+public:
+  NotIterable(std::string typel) : ParseException(typel + ", iterable nist.") {}
+};
+
 #endif // EXCEPTION_HH_

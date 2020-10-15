@@ -59,6 +59,7 @@ str       '(\\.|[^\\'])*'
 "chiz"          { return P_CHIZ;    }
 "chaap"         { return P_PRINT;   }
 "begir"         { return P_INPUT;   }
+"andaze"        { return P_LEN;     }
 
 "va"            { return P_AND;     }
 "ya"            { return P_OR;      }

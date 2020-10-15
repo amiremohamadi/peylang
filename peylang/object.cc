@@ -219,6 +219,14 @@ Object Object::operator%(const Object &obj) const {
   throw InvalidOperand(type_name(_type), type_name(obj._type), "%");
 }
 
+Object Object::length() const {
+  switch (_type) {
+  case STRING:
+    return StringType::length(*this);
+  }
+  throw NotIterable(type_name(_type));
+}
+
 // Object Classes
 Object IntType::add(const Object &left, const Object &right) {
 #ifdef DEBUG
@@ -546,6 +554,14 @@ Object StringType::add(const Object &left, const Object &right) {
   default:
     throw InvalidOperand(type_name(left._type), type_name(right._type), "+");
   }
+}
+
+Object StringType::length(const Object &obj) {
+#ifdef DEBUG
+  assert(obj._type == STRING);
+#endif
+
+  return Object((int)obj._string.size());
 }
 
 } // namespace pey

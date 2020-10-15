@@ -35,6 +35,15 @@ public:
   virtual Object eval(Symtable &smtbl) const { return smtbl[_name]; }
 };
 
+class Len : public Expression {
+private:
+  Expression *_exp;
+
+public:
+  Len(Expression *exp) : _exp(exp) {}
+  virtual Object eval(Symtable &smtbl) const;
+};
+
 class BinaryOperation : public Expression {
 protected:
   Expression *_left, *_right;
