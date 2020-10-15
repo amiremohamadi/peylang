@@ -63,4 +63,8 @@ Object Or::eval(Symtable &smtbl) const {
   return this->_left->eval(smtbl).logic_or(this->_right->eval(smtbl));
 }
 
+Object IndexOf::eval(Symtable &smtbl) const {
+  return this->_left->eval(smtbl).get_item(this->_right->eval(smtbl));
+}
+
 } // namespace pey
