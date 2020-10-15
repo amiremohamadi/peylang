@@ -51,4 +51,9 @@ public:
   NotIterable(std::string typel) : ParseException(typel + ", iterable nist.") {}
 };
 
+class OutOfBoundIndex : public ParseException {
+public:
+  OutOfBoundIndex() : ParseException("index kharej az baze.") {}
+};
+
 #endif // EXCEPTION_HH_

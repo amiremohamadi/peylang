@@ -219,6 +219,7 @@ expression:
           | '+' expression              { $$ = $2; }
 
           | P_LEN '(' expression ')'    { $$ = new Len($3); }
+          | expression '[' expression ']'    { $$ = new IndexOf($1, $3); }
 
 
 ; 
