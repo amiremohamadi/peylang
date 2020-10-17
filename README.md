@@ -33,13 +33,22 @@ chaap 'salam donya!';
 chiz esm = 'peyman';
 chaap esm + ' khar ast';
 
+-- string length
+chaap andaze(esm);
+
+-- string get item
+chaap esm[0];
+chaap esm[1];
+chiz akhar = esm[andaze(esm)-1];
+chaap akhar;
+
 -- logical and or
 agar (folan > 10 va folan < 20) ya folan == 40 {
     chaap 200;
 }
 ```
 
-You can find more samples [here](https://github.com/amiremohamadi/peylang/tree/0.0.6/test/samples).
+You can find more samples [here](https://github.com/amiremohamadi/peylang/tree/0.0.8/test/samples).
 
 
 ## Syntax Highlighter
@@ -50,7 +59,7 @@ You can find more samples [here](https://github.com/amiremohamadi/peylang/tree/0
 
 ## Installing Peylang
 ### Windows
-On Windows machines, you can use [PeySetup](https://github.com/amiremohamadi/peylang/releases/download/0.0.6/PeySetup.exe).
+On Windows machines, you can use [PeySetup](https://github.com/amiremohamadi/peylang/releases/download/0.0.8/PeySetup.exe).
 <br/>
 Don't forget to restart your machine after installing. Then open cmd and type:
 ```
@@ -60,7 +69,7 @@ peyman your_file_name.pey
 If it didn't recognize the command, add it manually to PATH variables and retry.
 
 ### Linux
-On linux machines, download [this](https://github.com/amiremohamadi/peylang/releases/download/0.0.6/peyman).
+On linux machines, download [this](https://github.com/amiremohamadi/peylang/releases/download/0.0.8/peyman).
 <br/>
 Don't forget ```chmod +x peyman```
 
