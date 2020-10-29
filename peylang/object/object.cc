@@ -1,25 +1,9 @@
 #include <object/object.hh>
+#include <object/stringobject.hh>
+#include <object/intobject.hh>
+#include <object/floatobject.hh>
 
 namespace pey {
-
-std::string type_name(int type) {
-  // helper funciotn to retrieve and get type_name as a string
-  std::string result;
-  switch (type) {
-  case INT:
-    result = "int";
-    break;
-  case FLOAT:
-    result = "float";
-    break;
-  case STRING:
-    result = "string";
-    break;
-  default:
-    result = "unknown";
-  }
-  return result;
-}
 
 // Object declarations
 
@@ -109,9 +93,9 @@ bool Object::logic_or(const Object &obj) const {
 bool operator==(const Object &lobj, const Object &robj) {
   switch (lobj._type) {
   case INT:
-    return IntType::equal(lobj, robj);
+    return IntObject::equal(lobj, robj);
   case FLOAT:
-    return FloatType::equal(lobj, robj);
+    return FloatObject::equal(lobj, robj);
   }
   throw InvalidOperand(type_name(lobj._type), type_name(robj._type), "==");
 }
@@ -119,9 +103,9 @@ bool operator==(const Object &lobj, const Object &robj) {
 bool operator!=(const Object &lobj, const Object &robj) {
   switch (lobj._type) {
   case INT:
-    return IntType::not_equal(lobj, robj);
+    return IntObject::not_equal(lobj, robj);
   case FLOAT:
-    return FloatType::not_equal(lobj, robj);
+    return FloatObject::not_equal(lobj, robj);
   }
   throw InvalidOperand(type_name(lobj._type), type_name(robj._type), "!=");
 }
@@ -129,9 +113,9 @@ bool operator!=(const Object &lobj, const Object &robj) {
 bool operator<=(const Object &lobj, const Object &robj) {
   switch (lobj._type) {
   case INT:
-    return IntType::less_equal(lobj, robj);
+    return IntObject::less_equal(lobj, robj);
   case FLOAT:
-    return FloatType::less_equal(lobj, robj);
+    return FloatObject::less_equal(lobj, robj);
   }
   throw InvalidOperand(type_name(lobj._type), type_name(robj._type), "<=");
 }
@@ -139,9 +123,9 @@ bool operator<=(const Object &lobj, const Object &robj) {
 bool operator>=(const Object &lobj, const Object &robj) {
   switch (lobj._type) {
   case INT:
-    return IntType::greater_equal(lobj, robj);
+    return IntObject::greater_equal(lobj, robj);
   case FLOAT:
-    return FloatType::greater_equal(lobj, robj);
+    return FloatObject::greater_equal(lobj, robj);
   }
   throw InvalidOperand(type_name(lobj._type), type_name(robj._type), ">=");
 }
@@ -149,9 +133,9 @@ bool operator>=(const Object &lobj, const Object &robj) {
 bool operator<(const Object &lobj, const Object &robj) {
   switch (lobj._type) {
   case INT:
-    return IntType::less(lobj, robj);
+    return IntObject::less(lobj, robj);
   case FLOAT:
-    return FloatType::less(lobj, robj);
+    return FloatObject::less(lobj, robj);
   }
   throw InvalidOperand(type_name(lobj._type), type_name(robj._type), "<");
 }
@@ -159,9 +143,9 @@ bool operator<(const Object &lobj, const Object &robj) {
 bool operator>(const Object &lobj, const Object &robj) {
   switch (lobj._type) {
   case INT:
-    return IntType::greater(lobj, robj);
+    return IntObject::greater(lobj, robj);
   case FLOAT:
-    return FloatType::greater(lobj, robj);
+    return FloatObject::greater(lobj, robj);
   }
   throw InvalidOperand(type_name(lobj._type), type_name(robj._type), ">");
 }
@@ -169,11 +153,11 @@ bool operator>(const Object &lobj, const Object &robj) {
 Object Object::operator+(const Object &obj) const {
   switch (_type) {
   case INT:
-    return IntType::add(*this, obj);
+    return IntObject::add(*this, obj);
   case FLOAT:
-    return FloatType::add(*this, obj);
+    return FloatObject::add(*this, obj);
   case STRING:
-    return StringType::add(*this, obj);
+    return StringObject::add(*this, obj);
   }
   throw InvalidOperand(type_name(_type), type_name(obj._type), "+");
 }
@@ -181,9 +165,9 @@ Object Object::operator+(const Object &obj) const {
 Object Object::operator-(const Object &obj) const {
   switch (_type) {
   case INT:
-    return IntType::sub(*this, obj);
+    return IntObject::sub(*this, obj);
   case FLOAT:
-    return FloatType::sub(*this, obj);
+    return FloatObject::sub(*this, obj);
   }
   throw InvalidOperand(type_name(_type), type_name(obj._type), "-");
 }
@@ -191,9 +175,9 @@ Object Object::operator-(const Object &obj) const {
 Object Object::operator*(const Object &obj) const {
   switch (_type) {
   case INT:
-    return IntType::mul(*this, obj);
+    return IntObject::mul(*this, obj);
   case FLOAT:
-    return FloatType::mul(*this, obj);
+    return FloatObject::mul(*this, obj);
   }
   throw InvalidOperand(type_name(_type), type_name(obj._type), "*");
 }
@@ -201,9 +185,9 @@ Object Object::operator*(const Object &obj) const {
 Object Object::operator/(const Object &obj) const {
   switch (_type) {
   case INT:
-    return IntType::div(*this, obj);
+    return IntObject::div(*this, obj);
   case FLOAT:
-    return FloatType::div(*this, obj);
+    return FloatObject::div(*this, obj);
   }
   throw InvalidOperand(type_name(_type), type_name(obj._type), "/");
 }
@@ -211,7 +195,7 @@ Object Object::operator/(const Object &obj) const {
 Object Object::operator%(const Object &obj) const {
   switch (_type) {
   case INT:
-    return IntType::mod(*this, obj);
+    return IntObject::mod(*this, obj);
   case FLOAT:
     // we can't use mod on floating numbers
     throw ModOnFloat();
@@ -222,7 +206,7 @@ Object Object::operator%(const Object &obj) const {
 Object Object::length() const {
   switch (_type) {
   case STRING:
-    return StringType::length(*this);
+    return StringObject::length(*this);
   }
   throw NotIterable(type_name(_type));
 }
@@ -230,367 +214,9 @@ Object Object::length() const {
 Object Object::get_item(const Object &obj) const {
   switch (_type) {
   case STRING:
-    return StringType::get_item(*this, obj);
+    return StringObject::get_item(*this, obj);
   }
   throw NotIterable(type_name(_type));
-}
-
-// Object Classes
-Object IntType::add(const Object &left, const Object &right) {
-#ifdef DEBUG
-  assert(left._type == INT);
-#endif
-
-  switch (right._type) {
-  case INT:
-    return Object(left._int + right._int);
-  case FLOAT:
-    return Object(left._int + right._float);
-  default:
-    throw InvalidOperand(type_name(left._type), type_name(right._type), "+");
-  }
-}
-
-Object IntType::sub(const Object &left, const Object &right) {
-#ifdef DEBUG
-  assert(left._type == INT);
-#endif
-
-  switch (right._type) {
-  case INT:
-    return Object(left._int - right._int);
-  case FLOAT:
-    return Object(left._int - right._float);
-  default:
-    throw InvalidOperand(type_name(left._type), type_name(right._type), "-");
-  }
-}
-
-Object IntType::mul(const Object &left, const Object &right) {
-#ifdef DEBUG
-  assert(left._type == INT);
-#endif
-
-  switch (right._type) {
-  case INT:
-    return Object(left._int * right._int);
-  case FLOAT:
-    return Object(left._int * right._float);
-  default:
-    throw InvalidOperand(type_name(left._type), type_name(right._type), "*");
-  }
-}
-
-Object IntType::div(const Object &left, const Object &right) {
-#ifdef DEBUG
-  assert(left._type == INT);
-#endif
-
-  switch (right._type) {
-  case INT:
-    // special case: can't devide integer to zero
-    // (float is okay, so it must only check in case of having two integers)
-    if (right._int == 0)
-      throw DivByZero();
-    return Object(left._int / right._int);
-  case FLOAT:
-    return Object(left._int / right._float);
-  default:
-    throw InvalidOperand(type_name(left._type), type_name(right._type), "/");
-  }
-}
-
-Object IntType::mod(const Object &left, const Object &right) {
-#ifdef DEBUG
-  assert(left._type == INT);
-#endif
-
-  switch (right._type) {
-  case INT:
-    // special case: can't calculate mod of integer to zero
-    if (right._int == 0)
-      throw ModByZero();
-    return Object(left._int % right._int);
-  case FLOAT:
-    // can't use mod on floating numbers
-    throw ModOnFloat();
-  default:
-    throw InvalidOperand(type_name(left._type), type_name(right._type), "%");
-  }
-}
-
-bool IntType::equal(const Object &left, const Object &right) {
-#ifdef DEBUG
-  assert(left._type == INT);
-#endif
-
-  switch (right._type) {
-  case INT:
-    return left._int == right._int;
-  case FLOAT:
-    return left._int == right._float;
-  default:
-    throw InvalidOperand(type_name(left._type), type_name(right._type), "==");
-  }
-}
-
-bool IntType::not_equal(const Object &left, const Object &right) {
-#ifdef DEBUG
-  assert(left._type == INT);
-#endif
-
-  return !IntType::equal(left, right);
-}
-
-bool IntType::less_equal(const Object &left, const Object &right) {
-#ifdef DEBUG
-  assert(left._type == INT);
-#endif
-
-  switch (right._type) {
-  case INT:
-    return left._int <= right._int;
-  case FLOAT:
-    return left._int <= right._float;
-  default:
-    throw InvalidOperand(type_name(left._type), type_name(right._type), "<=");
-  }
-}
-
-bool IntType::greater_equal(const Object &left, const Object &right) {
-#ifdef DEBUG
-  assert(left._type == INT);
-#endif
-
-  switch (right._type) {
-  case INT:
-    return left._int >= right._int;
-  case FLOAT:
-    return left._int >= right._float;
-  default:
-    throw InvalidOperand(type_name(left._type), type_name(right._type), ">=");
-  }
-}
-
-bool IntType::less(const Object &left, const Object &right) {
-#ifdef DEBUG
-  assert(left._type == INT);
-#endif
-
-  switch (right._type) {
-  case INT:
-    return left._int < right._int;
-  case FLOAT:
-    return left._int < right._float;
-  default:
-    throw InvalidOperand(type_name(left._type), type_name(right._type), "<");
-  }
-}
-
-bool IntType::greater(const Object &left, const Object &right) {
-#ifdef DEBUG
-  assert(left._type == INT);
-#endif
-
-  switch (right._type) {
-  case INT:
-    return left._int > right._int;
-  case FLOAT:
-    return left._int > right._float;
-  default:
-    throw InvalidOperand(type_name(left._type), type_name(right._type), ">");
-  }
-}
-
-// float type
-
-Object FloatType::add(const Object &left, const Object &right) {
-#ifdef DEBUG
-  assert(left._type == FLOAT);
-#endif
-
-  switch (right._type) {
-  case INT:
-    return Object(left._float + right._int);
-  case FLOAT:
-    return Object(left._float + right._float);
-  default:
-    throw InvalidOperand(type_name(left._type), type_name(right._type), "+");
-  }
-}
-
-Object FloatType::sub(const Object &left, const Object &right) {
-#ifdef DEBUG
-  assert(left._type == FLOAT);
-#endif
-
-  switch (right._type) {
-  case INT:
-    return Object(left._float - right._int);
-  case FLOAT:
-    return Object(left._float - right._float);
-  default:
-    throw InvalidOperand(type_name(left._type), type_name(right._type), "-");
-  }
-}
-
-Object FloatType::mul(const Object &left, const Object &right) {
-#ifdef DEBUG
-  assert(left._type == FLOAT);
-#endif
-
-  switch (right._type) {
-  case INT:
-    return Object(left._float * right._int);
-  case FLOAT:
-    return Object(left._float * right._float);
-  default:
-    throw InvalidOperand(type_name(left._type), type_name(right._type), "*");
-  }
-}
-
-Object FloatType::div(const Object &left, const Object &right) {
-#ifdef DEBUG
-  assert(left._type == FLOAT);
-#endif
-
-  switch (right._type) {
-  case INT:
-    return Object(left._float / right._int);
-  case FLOAT:
-    return Object(left._float / right._float);
-  default:
-    throw InvalidOperand(type_name(left._type), type_name(right._type), "/");
-  }
-}
-
-bool FloatType::equal(const Object &left, const Object &right) {
-#ifdef DEBUG
-  assert(left._type == FLOAT);
-#endif
-
-  switch (right._type) {
-  case INT:
-    return left._float == right._int;
-  case FLOAT:
-    return left._float == right._float;
-  default:
-    throw InvalidOperand(type_name(left._type), type_name(right._type), "==");
-  }
-}
-
-bool FloatType::not_equal(const Object &left, const Object &right) {
-#ifdef DEBUG
-  assert(left._type == FLOAT);
-#endif
-
-  return !FloatType::equal(left, right);
-}
-
-bool FloatType::less_equal(const Object &left, const Object &right) {
-#ifdef DEBUG
-  assert(left._type == FLOAT);
-#endif
-
-  switch (right._type) {
-  case INT:
-    return left._float <= right._int;
-  case FLOAT:
-    return left._float <= right._float;
-  default:
-    throw InvalidOperand(type_name(left._type), type_name(right._type), "<=");
-  }
-}
-
-bool FloatType::greater_equal(const Object &left, const Object &right) {
-#ifdef DEBUG
-  assert(left._type == FLOAT);
-#endif
-
-  switch (right._type) {
-  case INT:
-    return left._float >= right._int;
-  case FLOAT:
-    return left._float >= right._float;
-  default:
-    throw InvalidOperand(type_name(left._type), type_name(right._type), ">=");
-  }
-}
-
-bool FloatType::less(const Object &left, const Object &right) {
-#ifdef DEBUG
-  assert(left._type == FLOAT);
-#endif
-
-  switch (right._type) {
-  case INT:
-    return left._float < right._int;
-  case FLOAT:
-    return left._float < right._float;
-  default:
-    throw InvalidOperand(type_name(left._type), type_name(right._type), "<");
-  }
-}
-
-bool FloatType::greater(const Object &left, const Object &right) {
-#ifdef DEBUG
-  assert(left._type == FLOAT);
-#endif
-
-  switch (right._type) {
-  case INT:
-    return left._float > right._int;
-  case FLOAT:
-    return left._float > right._float;
-  default:
-    throw InvalidOperand(type_name(left._type), type_name(right._type), ">");
-  }
-}
-
-// string
-
-std::string StringType::stringify(std::string str) { return "'" + str + "'"; }
-
-Object StringType::add(const Object &left, const Object &right) {
-#ifdef DEBUG
-  assert(left._type == STRING);
-#endif
-
-  switch (right._type) {
-  case STRING:
-    return Object(stringify(left._string + right._string));
-  default:
-    throw InvalidOperand(type_name(left._type), type_name(right._type), "+");
-  }
-}
-
-Object StringType::length(const Object &obj) {
-#ifdef DEBUG
-  assert(obj._type == STRING);
-#endif
-
-  return Object((int)obj._string.size());
-}
-
-Object StringType::get_item(const Object &left, const Object &right) {
-#ifdef DEBUG
-  assert(left._type == STRING);
-#endif
-
-  // only int as index
-  if (right._type != INT)
-    throw InvalidOperand(type_name(left._type), type_name(right._type), "[]");
-
-  // check index bound
-  if (right._int >= left._string.size() || right._int < 0)
-    throw OutOfBoundIndex();
-
-  // get item and because we're on c++ it returns char
-  // so next step is to convert char to string (because in peylang we don't
-  // have char, we only want strings)
-  char chr = left._string[right._int];
-  std::string item(1, chr);
-  return Object(stringify(item));
 }
 
 } // namespace pey

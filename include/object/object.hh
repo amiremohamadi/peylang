@@ -8,17 +8,9 @@
 #include <iostream>
 #include <regex>
 #include <string>
+#include <object/types.hh>    // Type
 
 namespace pey {
-
-typedef enum Type {
-  INT,
-  FLOAT,
-  STRING,
-} Type;
-
-// util to get type name
-std::string type_name(int type);
 
 // Object class represent anytype objects
 // containing int, float, string ...
@@ -26,9 +18,9 @@ std::string type_name(int type);
 // on each object type
 class Object {
   // all types of data represent as object
-  friend class IntType;
-  friend class FloatType;
-  friend class StringType;
+  friend class IntObject;
+  friend class FloatObject;
+  friend class StringObject;
 
 private:
   Type _type;
@@ -90,52 +82,6 @@ public:
 
   Object length() const;
   Object get_item(const Object &obj) const;
-};
-
-// Type Classes
-// each type must have a util class that contains type operators
-class IntType {
-  // utils for integer value
-public:
-  static Object add(const Object &left, const Object &right);
-  static Object sub(const Object &left, const Object &right);
-  static Object mul(const Object &left, const Object &right);
-  static Object div(const Object &left, const Object &right);
-  static Object mod(const Object &left, const Object &right);
-
-  static bool equal(const Object &left, const Object &right);
-  static bool not_equal(const Object &left, const Object &right);
-  static bool less_equal(const Object &left, const Object &right);
-  static bool greater_equal(const Object &left, const Object &right);
-  static bool less(const Object &left, const Object &right);
-  static bool greater(const Object &left, const Object &right);
-};
-
-class FloatType {
-  // utils for float value
-public:
-  static Object add(const Object &left, const Object &right);
-  static Object sub(const Object &left, const Object &right);
-  static Object mul(const Object &left, const Object &right);
-  static Object div(const Object &left, const Object &right);
-
-  static bool equal(const Object &left, const Object &right);
-  static bool not_equal(const Object &left, const Object &right);
-  static bool less_equal(const Object &left, const Object &right);
-  static bool greater_equal(const Object &left, const Object &right);
-  static bool less(const Object &left, const Object &right);
-  static bool greater(const Object &left, const Object &right);
-};
-
-class StringType {
-  // utils fr string value
-private:
-  static std::string stringify(std::string str);
-
-public:
-  static Object add(const Object &left, const Object &right);
-  static Object length(const Object &obj);
-  static Object get_item(const Object &left, const Object &right);
 };
 
 } // namespace pey
