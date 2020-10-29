@@ -5,7 +5,7 @@
 
 #include <list>
 #include <map>
-#include <object.hh>
+#include <object/object.hh>
 #include <string>
 #include <symtable.hh>
 
