@@ -1,4 +1,4 @@
-#include <object.hh>
+#include <object/object.hh>
 
 namespace pey {
 
