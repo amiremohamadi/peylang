@@ -100,7 +100,9 @@ void yyerror(const char *str, char chr) {
 %left P_L P_LEQ P_G P_GEQ P_EQ P_NEQ
 %left '+' '-'
 %left '*' '/' '%'
-%nonassoc UMINUS  "unary minus"
+/* %nonassoc '-' "unary minus" */
+%right '[' 
+%left  ']' 
 
 %type<exp> expression;
 %type<stmt> statement;
@@ -219,8 +221,7 @@ expression:
           | '+' expression              { $$ = $2; }
 
           | P_LEN '(' expression ')'    { $$ = new Len($3); }
-          | expression '[' expression ']'    { $$ = new IndexOf($1, $3); }
-
+          | expression '[' expression ']'  { $$ = new IndexOf($1, $3); }
 
 ; 
 
