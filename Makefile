@@ -5,7 +5,7 @@ YACC 	:= bison -d
 PROGRAM := peyman
 
 INCLUDE := -Iinclude/ -Iparser/
-SRC 	:= $(wildcard peylang/*cc)
+SRC 	:= $(wildcard peylang/object/*cc) $(wildcard peylang/*cc)
 OBJ		:= $(SRC:%.cc=%.o) parser/parser.tab.o parser/lex.yy.o
 
 

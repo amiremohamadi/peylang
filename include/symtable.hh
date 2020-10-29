@@ -4,7 +4,7 @@
 #define SYMTABLE_HH_
 
 #include <map>
-#include <object.hh>
+#include <object/object.hh>
 
 namespace pey {
 

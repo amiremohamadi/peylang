@@ -2,7 +2,7 @@
 #include <iostream>
 #include <parser.tab.h>
 
-#define VERSION "0.0.8"
+#define VERSION "0.0.9"
 
 extern int yyparse();
 extern FILE *yyin;
