@@ -4,6 +4,19 @@ namespace pey {
 
 std::string StringObject::stringify(std::string str) { return "'" + str + "'"; }
 
+bool StringObject::equal(const Object &left, const Object &right) {
+#ifdef DEBUG
+  assert(left._type == STRING);
+#endif
+
+  switch (right._type) {
+  case STRING:
+    return left._string == right._string;
+  default:
+    throw InvalidOperand(type_name(left._type), type_name(right._type), "==");
+  }
+}
+
 Object StringObject::add(const Object &left, const Object &right) {
 #ifdef DEBUG
   assert(left._type == STRING);

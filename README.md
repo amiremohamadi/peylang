@@ -1,6 +1,6 @@
 # Peyman Language
 
-A programming language to honor our beloved friend, Peyman.
+A [turing-complete](https://github.com/amiremohamadi/peylang/blob/master/test/samples/rule110.pey) programming language to honor our beloved friend, Peyman.
 
 ## Sample
 ```
