@@ -96,6 +96,8 @@ bool operator==(const Object &lobj, const Object &robj) {
     return IntObject::equal(lobj, robj);
   case FLOAT:
     return FloatObject::equal(lobj, robj);
+  case STRING:
+    return StringObject::equal(lobj, robj);
   }
   throw InvalidOperand(type_name(lobj._type), type_name(robj._type), "==");
 }

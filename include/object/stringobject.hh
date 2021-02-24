@@ -12,6 +12,7 @@ private:
   static std::string stringify(std::string str);
 
 public:
+  static bool equal(const Object &left, const Object &right);
   static Object add(const Object &left, const Object &right);
   static Object length(const Object &obj);
   static Object get_item(const Object &left, const Object &right);

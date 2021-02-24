@@ -1,0 +1,33 @@
+-- https://en.wikipedia.org/wiki/Rule_110
+
+chiz state = '110100001001000100000100000011';
+chiz next_state = '0';
+
+chiz i = 1;
+ta i < andaze(state)-1 {
+    chiz triplet = state[i-1] + state[i] + state[i+1];
+
+    -- next gen
+    agar triplet == '111' {
+        next_state = next_state + '0';
+    } agar triplet == '110' {
+        next_state = next_state + '1';
+    } agar triplet == '101' {
+        next_state = next_state + '1';
+    } agar triplet == '100' {
+        next_state = next_state + '0';
+    } agar triplet == '011' {
+        next_state = next_state + '1';
+    } agar triplet == '010' {
+        next_state = next_state + '1';
+    } agar triplet == '001' {
+        next_state = next_state + '1';
+    } agar triplet == '000' {
+        next_state = next_state + '0';
+    }
+
+    i += 1;
+}
+
+next_state = next_state + '0';
+chaap next_state;
