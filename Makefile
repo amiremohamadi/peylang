@@ -9,7 +9,7 @@ SRC 	:= $(wildcard peylang/object/*cc) $(wildcard peylang/*cc)
 OBJ		:= $(SRC:%.cc=%.o) parser/parser.tab.o parser/lex.yy.o
 
 
-all: $(PROGRAM)
+build: $(PROGRAM)
 
 peyman: $(OBJ)
 	$(CXX) $(INCLUDE) -o $(PROGRAM) $(OBJ) peyman.cc
@@ -29,7 +29,10 @@ parser/lex.yy.o: parser/lex.yy.c
 %.o: %.cc
 	$(CXX) $(INCLUDE) -c $< -o $@
 
+test: build
+	(cat test/integration/cases.text | ( (echo 0 | ./peyman test/integration/tests.pey) | ( diff /dev/fd/3 /dev/fd/4 ) 4<&0 ) 3<&0)
+
 clean:
 	rm -f $(OBJ) $(PROGRAM) parser/parser.tab.c parser/parser.tab.h parser/lex.yy.c
 
-.PHONY: all clean
+.PHONY: build test clean
