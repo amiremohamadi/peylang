@@ -1,0 +1,44 @@
+chiz esm = 'peyman';
+chiz sen = 12;
+chiz ghad = 1.78;
+
+-- TEST A
+chaap 'salam, ' + esm + '!';
+
+-- TEST B
+chaap 'sen:';
+chaap sen;
+
+-- TEST C
+chaap 'ghad: ';
+chaap ghad;
+
+-- TEST D
+chaap ghad / 2;
+chaap sen / 5;
+chaap sen / 5.0;
+chaap 10 % 3;
+chaap (2 + 1 * 3) / 2;
+
+-- TEST E
+chiz i;
+begir i;
+
+ta i < 12 {
+    agar i % 2 == 0 {
+        chaap i;
+    }
+    i += 1;
+}
+
+-- TEST F
+chiz s = 'dorood donya';
+chiz i = 0;
+
+ta i < andaze(s) {
+    chaap s[i];
+    i = i + 1;
+}
+
+-- TEST G
+chaap 'salam'[2];

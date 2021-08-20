@@ -1,4 +1,4 @@
-%error-verbose
+%define parse.error verbose
 
 %code requires {
 
