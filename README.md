@@ -46,6 +46,13 @@ chaap akhar;
 agar (folan > 10 va folan < 20) ya folan == 40 {
     chaap 200;
 }
+
+-- tabe
+jam a, b {
+    bede a + b;
+}
+
+jam(1, 2); -- 3
 ```
 
 You can find more samples [here](https://github.com/amiremohamadi/peylang/tree/0.0.8/test/samples).
