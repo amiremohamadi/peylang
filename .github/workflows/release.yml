@@ -1,0 +1,60 @@
+name: Release
+
+on:
+  workflow_dispatch:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    name: ${{ matrix.config.os }}
+    runs-on: ${{ matrix.config.os }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - name: "Peylang_Windows"
+            os: windows-latest
+            artifact: "peyman.exe"
+
+          - name: "Peylang_Linux"
+            os: ubuntu-latest
+            artifact: "peyman"
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: env details
+        run: |
+          echo github.event.action: ${{ github.event.action }}
+          echo github.event_name: ${{ github.event_name }}
+
+      - name: prepare windows
+        if: matrix.config.os == 'windows-latest'
+        run: |
+          choco install winflexbison3
+
+      - name: build
+        shell: bash
+        run: |
+          make build
+
+      - name: create zip archive
+        shell: bash
+        run: |
+          7z a ${{ matrix.config.name }}.zip ${{ matrix.config.artifact }}
+
+      - name: upload artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: ${{ matrix.config.name }}
+          path: ./${{ matrix.config.artifact }}
+
+      - name: upload to release
+        uses: svenstaro/upload-release-action@v2
+        if: github.event_name == 'release'
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ./${{ matrix.config.name }}.zip
+          tag: ${{ github.ref }}
