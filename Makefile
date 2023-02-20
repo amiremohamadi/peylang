@@ -1,6 +1,13 @@
 CXX 	:= g++
-LEX 	:= flex
-YACC 	:= bison -d
+FLAGS   := -static -static-libgcc -static-libstdc++
+
+ifeq ($(OS),Windows_NT)
+	LEX 	:= win_flex
+	YACC 	:= win_bison -d
+else
+	LEX 	:= flex
+	YACC 	:= bison -d
+endif
 
 PROGRAM := peyman
 
@@ -12,7 +19,7 @@ OBJ		:= $(SRC:%.cc=%.o) parser/parser.tab.o parser/lex.yy.o
 build: $(PROGRAM)
 
 peyman: $(OBJ)
-	$(CXX) $(INCLUDE) -o $(PROGRAM) $(OBJ) peyman.cc
+	$(CXX) $(FLAGS) $(INCLUDE) -o $(PROGRAM) $(OBJ) peyman.cc
 
 parser/parser.tab.c: parser/parser.y
 	$(YACC) -o parser/parser.tab.c parser/parser.y
